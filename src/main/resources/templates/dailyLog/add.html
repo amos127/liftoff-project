@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+<form method="post">
+    <div class="form-group">
+        <label>Date:
+            <input type="date" th:field="${dailyLog.date}" class="form-control">
+        </label>
+<!--        <p class="error" th:errors="${event.name}"></p>-->
+    </div>
+    <div class="form-group">
+        <label>Mood Score:
+            <input th:field="${dailyLog.moodScore}" class="form-control">
+        </label>
+<!--        <p class="error" th:errors="${event.description}"></p>-->
+    </div>
+    <div class="form-group">
+        <label>Energy Score:
+            <input th:field="${dailyLog.energyScore}" class="form-control">
+        </label>
+<!--        <p class="error" th:errors="${event.contactEmail}"></p>-->
+    </div>
+    <div class="form-group">
+        <label>Did you eat breakfast?
+            <input th:field="${dailyLog.ateBreakfast}" class="form-control">
+        </label>
+        <!--        <p class="error" th:errors="${event.contactEmail}"></p>-->
+    </div>
+    <div class="form-group">
+        <label>Did you eat lunch?
+            <input th:field="${dailyLog.ateLunch}" class="form-control">
+        </label>
+        <!--        <p class="error" th:errors="${event.name}"></p>-->
+    </div>
+    <div class="form-group">
+        <label>Did you eat dinner?
+            <input th:field="${dailyLog.ateDinner}" class="form-control">
+        </label>
+        <!--        <p class="error" th:errors="${event.name}"></p>-->
+    </div>
+    <div class="form-group">
+        <label>Did you take your medicine?
+            <input th:field="${dailyLog.tookMedicine}" class="form-control">
+        </label>
+        <!--        <p class="error" th:errors="${event.name}"></p>-->
+    </div>
+    <div class="form-group">
+        <label>Number of alcoholic drinks:
+            <input th:field="${dailyLog.alcoholicDrinks}" class="form-control">
+        </label>
+        <!--        <p class="error" th:errors="${event.name}"></p>-->
+    </div>
+    <div class="form-group">
+        <label>Number of caffeinated drinks:
+            <input th:field="${dailyLog.caffeinatedDrinks}" class="form-control">
+        </label>
+        <!--        <p class="error" th:errors="${event.name}"></p>-->
+    </div>
+    <div class="form-group">
+        <label>Did you exercise?
+            <input th:field="${dailyLog.didExercise}" class="form-control">
+        </label>
+        <!--        <p class="error" th:errors="${event.name}"></p>-->
+    </div>
+    <div class="form-group">
+        <label>Did you spend time outside?
+            <input th:field="${dailyLog.wentOutside}" class="form-control">
+        </label>
+        <!--        <p class="error" th:errors="${event.name}"></p>-->
+    </div>
+<!--    <div class="form-group">-->
+<!--        <label>Type-->
+<!--            <select th:field="${event.type}">-->
+<!--                <option th:each="type : ${types}"-->
+<!--                        th:value="${type}"-->
+<!--                        th:text="${type.displayName}"-->
+<!--                ></option>-->
+<!--            </select>-->
+<!--        </label>-->
+<!--    </div>-->
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+    </div>
+</form>
+
+</body>
+</html>
