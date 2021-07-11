@@ -5,10 +5,9 @@ import org.launchcode.liftoffproject.models.DailyLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("dailyLog")
@@ -28,5 +27,24 @@ public class DailyLogController {
     public String processAddDailyLog(@ModelAttribute DailyLog newDailyLog) {
         dailyLogRepository.save(newDailyLog);
         return "dailyLog/view";
+    }
+
+    @GetMapping("view/{id}")
+    public String viewById(Model model, @PathVariable int id) {
+        Optional optDailyLog = dailyLogRepository.findById(id);
+        if (optDailyLog.isPresent()) {
+            DailyLog dailyLog = (DailyLog) optDailyLog.get();
+            model.addAttribute("dailyLog", dailyLog);
+            return "dailyLog/view";
+        } else {
+            return "redirect:../";
+        }
+    }
+
+
+    @GetMapping("summary")
+    public String displaySummary(Model model) {
+        model.addAttribute("dailyLogs", dailyLogRepository.findAll());
+        return "dailyLog/summary";
     }
 }
