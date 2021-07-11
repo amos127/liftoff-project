@@ -7,11 +7,10 @@
 <header th:replace="fragments :: header"></header>
 
 <table class="table table-striped">
-<!--    <thead>-->
-<!--    <tr>-->
-<!--        <th>Date</th>-->
-<!--        <td th:text="${dailyLog.date}"></td>-->
-<!--    </tr>-->
+    <tr>
+        <th>Date</th>
+        <td th:text="${dailyLog.date}"></td>
+    </tr>
     <tr>
         <th>Mood Score</th>
         <td th:text="${dailyLog.moodScore}"></td>
@@ -24,28 +23,44 @@
         <th>Ate Breakfast?</th>
         <td th:text="${dailyLog.ateBreakfast}"></td>
     </tr>
-<!--        <th>Energy Score:</th>-->
-<!--        <th>Breakfast?</th>-->
-<!--        <th>Lunch?</th>-->
-<!--        <th>Dinner?</th>-->
-<!--        <th>Medicine?</th>-->
-<!--        <th>Number of alcoholic drinks:</th>-->
-<!--        <th>Number of caffeinated drinks:</th>-->
-<!--        <th>Exercise?</th>-->
-<!--        <th>Outside Time?</th>-->
-
-<!--    </thead>-->
-<!--    <tr th:text="${dailyLog.date}"></tr>-->
-<!--    <tr th:text="${dailyLog.moodScore}"></tr>-->
-<!--    <tr th:text="${dailyLog.energyScore}"></tr>-->
-<!--    <tr th:text="${dailyLog.ateBreakfast}"></tr>-->
-<!--    <tr th:text="${dailyLog.ateLunch}"></tr>-->
-<!--    <tr th:text="${dailyLog.ateDinner}"></tr>-->
-<!--    <tr th:text="${dailyLog.tookMedicine}"></tr>-->
-<!--    <tr th:text="${dailyLog.alcoholicDrinks}"></tr>-->
-<!--    <tr th:text="${dailyLog.caffeinatedDrinks}"></tr>-->
-<!--    <tr th:text="${dailyLog.didExercise}"></tr>-->
-<!--    <tr th:text="${dailyLog.wentOutside}"></tr>-->
+    <tr>
+        <th>Ate Lunch?</th>
+        <td th:text="${dailyLog.ateLunch}"></td>
+    </tr>
+    <tr>
+        <th>Ate Dinner?</th>
+        <td th:text="${dailyLog.ateDinner}"></td>
+    </tr>
+    <tr>
+        <th>Took Medicine?</th>
+        <td th:text="${dailyLog.tookMedicine}"></td>
+    </tr>
+    <tr>
+        <th>Number of Alcoholic Drinks</th>
+        <td th:text="${dailyLog.alcoholicDrinks}"></td>
+    </tr>
+    <tr>
+        <th>Number of Caffeinated Drinks</th>
+        <td th:text="${dailyLog.caffeinatedDrinks}"></td>
+    </tr>
+    <tr>
+        <th>Exercised?</th>
+        <td th:text="${dailyLog.didExercise}"></td>
+    </tr>
+    <tr>
+        <th>Went Outside?</th>
+        <td th:text="${dailyLog.wentOutside}"></td>
+    </tr>
+    <tr>
+        <td>
+            <a th:href="@{'/dailyLog/edit/' + ${dailyLog.id}}">Edit</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a th:href="@{'/dailyLog/delete/' + ${dailyLog.id}}">Delete</a>
+        </td>
+    </tr>
 </table>
 
 </body>

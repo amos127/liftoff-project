@@ -41,6 +41,30 @@ public class DailyLogController {
         }
     }
 
+    @GetMapping("edit/{id}")
+    public String editDailyLog(Model model, @PathVariable int id) {
+        Optional optDailyLog = dailyLogRepository.findById(id);
+        if (optDailyLog.isPresent()) {
+            DailyLog dailyLog = (DailyLog) optDailyLog.get();
+            model.addAttribute("dailyLog", dailyLog);
+            return "dailyLog/edit";
+        } else {
+            return "redirect:../";
+        }
+    }
+
+    @PostMapping("edit/{id}")
+    public String processEditDailyLog(@PathVariable int id, @ModelAttribute DailyLog dailyLog) {
+        dailyLog.setId(id);
+        dailyLogRepository.save(dailyLog);
+        return "dailyLog/view";
+    }
+
+    @GetMapping("delete/{id}")
+    public String deleteDailyLog(@PathVariable int id) {
+        dailyLogRepository.deleteById(id);
+        return "index";
+    }
 
     @GetMapping("summary")
     public String displaySummary(Model model) {
