@@ -68,11 +68,55 @@ public class Summary {
         } return Math.round((sum/conditionCount) * 100.0) / 100.0;
     }
 
+    public static double averageEnergyByBreakfast(Iterable<DailyLog> dailyLogs, boolean condition) {
+        double sum = 0;
+        int conditionCount = 0;
+        for (DailyLog dailyLog : dailyLogs) {
+            if (dailyLog.isAteBreakfast() == condition) {
+                sum += dailyLog.getEnergyScore();
+                conditionCount++;
+            }
+        } return Math.round((sum/conditionCount) * 100.0) / 100.0;
+    }
+
+    public static double averageMoodBreakfastExercise(Iterable<DailyLog> dailyLogs) {
+        double sum = 0;
+        int conditionCount = 0;
+        for (DailyLog dailyLog : dailyLogs) {
+            if (dailyLog.isAteBreakfast() && dailyLog.isDidExercise()) {
+                sum += dailyLog.getMoodScore();
+                conditionCount++;
+            }
+        } return Math.round((sum/conditionCount) * 100.0) / 100.0;
+    }
+
+    public static double averageMoodBreakfastExerciseFalse(Iterable<DailyLog> dailyLogs) {
+        double sum = 0;
+        int conditionCount = 0;
+        for (DailyLog dailyLog : dailyLogs) {
+            if (!dailyLog.isAteBreakfast() || !dailyLog.isDidExercise()) {
+                sum += dailyLog.getMoodScore();
+                conditionCount++;
+            }
+        } return Math.round((sum/conditionCount) * 100.0) / 100.0;
+    }
+
     public static double averageEnergyBreakfastExercise(Iterable<DailyLog> dailyLogs) {
         double sum = 0;
         int conditionCount = 0;
         for (DailyLog dailyLog : dailyLogs) {
             if (dailyLog.isAteBreakfast() && dailyLog.isDidExercise()) {
+                sum += dailyLog.getEnergyScore();
+                conditionCount++;
+            }
+        } return Math.round((sum/conditionCount) * 100.0) / 100.0;
+    }
+
+    public static double averageEnergyBreakfastExerciseFalse(Iterable<DailyLog> dailyLogs) {
+        double sum = 0;
+        int conditionCount = 0;
+        for (DailyLog dailyLog : dailyLogs) {
+            if (!dailyLog.isAteBreakfast() || !dailyLog.isDidExercise()) {
                 sum += dailyLog.getEnergyScore();
                 conditionCount++;
             }

@@ -15,30 +15,53 @@
             <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${dailyLog.date}"></a>
         </li>
     </ul>
+</div>
+<div class="container body-content">
     <table class="table-striped">
+        <thead>
         <tr>
-            <th>Max breakfast streak:</th>
+            <th></th>
+            <th>Max Streak</th>
+        </tr>
+        </thead>
+        <tr>
+            <th>Breakfast:</th>
             <td th:text="${breakfastStreak}"></td>
         </tr>
         <tr>
-            <th>Max three meals/day streak:</th>
+            <th>Three meals/day:</th>
             <td th:text="${threeMealsStreak}"></td>
         </tr>
         <tr>
-            <th>Max streak of no alcohol:</th>
+            <th>No alcohol:</th>
             <td th:text="${noAlcoholStreak}"></td>
         </tr>
+    </table>
+</div>
+<div class="container body-content">
+    <table class="table-striped">
+        <thead>
         <tr>
-            <th>Avg mood score with breakfast:</th>
+            <th></th>
+            <th>Avg Mood True</th>
+            <th>Avg Mood False</th>
+            <th>Avg Energy True</th>
+            <th>Avg Energy False</th>
+        </tr>
+        </thead>
+        <tr>
+            <th>Breakfast:</th>
             <td th:text="${moodBreakfastTrue}"></td>
-        </tr>
-        <tr>
-            <th>Avg mood score no breakfast:</th>
             <td th:text="${moodBreakfastFalse}"></td>
+            <td th:text="${energyBreakfastTrue}"></td>
+            <td th:text="${energyBreakfastFalse}"></td>
         </tr>
         <tr>
-            <th>Avg energy score with breakfast and exercise:</th>
+            <th>Breakfast and exercise:</th>
+            <td th:text="${avgMoodBreakfastExercise}"></td>
+            <td th:text="${avgMoodBreakfastExerciseFalse}"></td>
             <td th:text="${avgEnergyBreakfastExercise}"></td>
+            <td th:text="${avgEnergyBreakfastExerciseFalse}"></td>
         </tr>
     </table>
 </div>

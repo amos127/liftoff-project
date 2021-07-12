@@ -77,8 +77,18 @@ public class DailyLogController {
                 Summary.averageMoodByBreakfast(dailyLogRepository.findAll(), true));
         model.addAttribute("moodBreakfastFalse",
                 Summary.averageMoodByBreakfast(dailyLogRepository.findAll(), false));
+        model.addAttribute("energyBreakfastTrue",
+                Summary.averageEnergyByBreakfast(dailyLogRepository.findAll(), true));
+        model.addAttribute("energyBreakfastFalse",
+                Summary.averageEnergyByBreakfast(dailyLogRepository.findAll(), false));
+        model.addAttribute("avgMoodBreakfastExercise",
+                Summary.averageMoodBreakfastExercise(dailyLogRepository.findAll()));
+        model.addAttribute("avgMoodBreakfastExerciseFalse",
+                Summary.averageMoodBreakfastExerciseFalse(dailyLogRepository.findAll()));
         model.addAttribute("avgEnergyBreakfastExercise",
                 Summary.averageEnergyBreakfastExercise(dailyLogRepository.findAll()));
+        model.addAttribute("avgEnergyBreakfastExerciseFalse",
+                Summary.averageEnergyBreakfastExerciseFalse(dailyLogRepository.findAll()));
         return "dailyLog/summary";
     }
 }
