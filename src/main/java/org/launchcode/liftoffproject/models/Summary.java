@@ -65,7 +65,7 @@ public class Summary {
                 sum += dailyLog.getMoodScore();
                 conditionCount++;
             }
-        } return sum/conditionCount;
+        } return Math.round((sum/conditionCount) * 100.0) / 100.0;
     }
 
     public static double averageEnergyBreakfastExercise(Iterable<DailyLog> dailyLogs) {
@@ -76,7 +76,7 @@ public class Summary {
                 sum += dailyLog.getEnergyScore();
                 conditionCount++;
             }
-        } return sum/conditionCount;
+        } return Math.round((sum/conditionCount) * 100.0) / 100.0;
     }
 
     public static double averageScoreBooleanAndInt(List<Integer> scoreIntList, List<Boolean> boolList,
