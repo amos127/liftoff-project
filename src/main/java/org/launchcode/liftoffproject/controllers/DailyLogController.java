@@ -2,6 +2,7 @@ package org.launchcode.liftoffproject.controllers;
 
 import org.launchcode.liftoffproject.data.DailyLogRepository;
 import org.launchcode.liftoffproject.models.DailyLog;
+import org.launchcode.liftoffproject.models.Summary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,6 +70,15 @@ public class DailyLogController {
     @GetMapping("summary")
     public String displaySummary(Model model) {
         model.addAttribute("dailyLogs", dailyLogRepository.findAll());
+        model.addAttribute("breakfastStreak", Summary.maxBreakfastStreak(dailyLogRepository.findAll()));
+        model.addAttribute("threeMealsStreak", Summary.maxThreeMealsStreak(dailyLogRepository.findAll()));
+        model.addAttribute("noAlcoholStreak", Summary.maxZeroAlcoholStreak(dailyLogRepository.findAll()));
+        model.addAttribute("moodBreakfastTrue",
+                Summary.averageMoodByBreakfast(dailyLogRepository.findAll(), true));
+        model.addAttribute("moodBreakfastFalse",
+                Summary.averageMoodByBreakfast(dailyLogRepository.findAll(), false));
+        model.addAttribute("avgEnergyBreakfastExercise",
+                Summary.averageEnergyBreakfastExercise(dailyLogRepository.findAll()));
         return "dailyLog/summary";
     }
 }

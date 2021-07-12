@@ -15,6 +15,32 @@
             <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${dailyLog.date}"></a>
         </li>
     </ul>
+    <table class="table-striped">
+        <tr>
+            <th>Max breakfast streak:</th>
+            <td th:text="${breakfastStreak}"></td>
+        </tr>
+        <tr>
+            <th>Max three meals/day streak:</th>
+            <td th:text="${threeMealsStreak}"></td>
+        </tr>
+        <tr>
+            <th>Max streak of no alcohol:</th>
+            <td th:text="${noAlcoholStreak}"></td>
+        </tr>
+        <tr>
+            <th>Avg mood score with breakfast:</th>
+            <td th:text="${moodBreakfastTrue}"></td>
+        </tr>
+        <tr>
+            <th>Avg mood score no breakfast:</th>
+            <td th:text="${moodBreakfastFalse}"></td>
+        </tr>
+        <tr>
+            <th>Avg energy score with breakfast and exercise:</th>
+            <td th:text="${avgEnergyBreakfastExercise}"></td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

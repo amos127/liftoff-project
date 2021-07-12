@@ -5,12 +5,29 @@ import java.util.List;
 public class Summary {
 
     //finds the maximum streak of "yes" responses to boolean questions
-    public static int maxTrueStreak(List<Boolean> boolList) {
+    public static int maxBreakfastStreak(Iterable<DailyLog> dailyLogs) {
 
         int longestStreak = 0;
         int currentStreak = 0;
-        for (boolean item : boolList) {
-            if (item == true) {
+        for (DailyLog dailyLog : dailyLogs) {
+            if (dailyLog.isAteBreakfast()) {
+                currentStreak++;
+                if (currentStreak > longestStreak) {
+                    longestStreak = currentStreak;
+                }
+            } else {
+                currentStreak = 0;
+            }
+        }
+        return longestStreak;
+    }
+
+    public static int maxThreeMealsStreak(Iterable<DailyLog> dailyLogs) {
+
+        int longestStreak = 0;
+        int currentStreak = 0;
+        for (DailyLog dailyLog : dailyLogs) {
+            if (dailyLog.isAteBreakfast() && dailyLog.isAteLunch() && dailyLog.isAteDinner()) {
                 currentStreak++;
                 if (currentStreak > longestStreak) {
                     longestStreak = currentStreak;
@@ -23,12 +40,12 @@ public class Summary {
     }
 
     //finds the maximum streak of "0" responses to integer questions
-    public static int maxZeroStreak(List<Integer> intList) {
+    public static int maxZeroAlcoholStreak(Iterable<DailyLog> dailyLogs) {
 
         int longestStreak = 0;
         int currentStreak = 0;
-        for (int item : intList) {
-            if (item == 0) {
+        for (DailyLog dailyLog : dailyLogs) {
+            if (dailyLog.getAlcoholicDrinks() == 0) {
                 currentStreak++;
                 if (currentStreak > longestStreak) {
                     longestStreak = currentStreak;
@@ -40,24 +57,23 @@ public class Summary {
         return longestStreak;
     }
 
-    public static double averageScoreBoolean(List<Integer> scoreIntList, List<Boolean> boolList, boolean condition) {
+    public static double averageMoodByBreakfast(Iterable<DailyLog> dailyLogs, boolean condition) {
         double sum = 0;
         int conditionCount = 0;
-        for (int i = 0; i < boolList.size(); i++) {
-            if (boolList.get(i) == condition) {
-                sum += scoreIntList.get(i);
+        for (DailyLog dailyLog : dailyLogs) {
+            if (dailyLog.isAteBreakfast() == condition) {
+                sum += dailyLog.getMoodScore();
                 conditionCount++;
             }
         } return sum/conditionCount;
     }
 
-    public static double averageScoreTwoBoolean(List<Integer> scoreIntList, List<Boolean> boolList,
-                                                List<Boolean> boolListTwo, boolean condition, boolean conditionTwo) {
+    public static double averageEnergyBreakfastExercise(Iterable<DailyLog> dailyLogs) {
         double sum = 0;
         int conditionCount = 0;
-        for (int i = 0; i < boolList.size(); i++) {
-            if (boolList.get(i) == condition && boolListTwo.get(i) == conditionTwo) {
-                sum += scoreIntList.get(i);
+        for (DailyLog dailyLog : dailyLogs) {
+            if (dailyLog.isAteBreakfast() && dailyLog.isDidExercise()) {
+                sum += dailyLog.getEnergyScore();
                 conditionCount++;
             }
         } return sum/conditionCount;
