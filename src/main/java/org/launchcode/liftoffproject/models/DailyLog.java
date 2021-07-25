@@ -1,9 +1,8 @@
 package org.launchcode.liftoffproject.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.time.LocalDate;
+import javax.persistence.*;
+
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +12,8 @@ public class DailyLog {
     @GeneratedValue
     private int id;
 
-    private String date;
+    private Date date;
+
     private int moodScore;
     private int energyScore;
     private boolean ateBreakfast;
@@ -25,7 +25,7 @@ public class DailyLog {
     private boolean didExercise;
     private boolean wentOutside;
 
-    public DailyLog(String date, int moodScore, int energyScore, boolean ateBreakfast,
+    public DailyLog(Date date, int moodScore, int energyScore, boolean ateBreakfast,
                     boolean ateLunch, boolean ateDinner,
                     boolean tookMedicine, int alcoholicDrinks, int caffeinatedDrinks,
                     boolean didExercise, boolean wentOutside) {
@@ -52,11 +52,11 @@ public class DailyLog {
         this.id = id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
