@@ -6,16 +6,16 @@
 
 <header th:replace="fragments :: header"></header>
 
-<!--<p th:unless="${dailyLogs} and ${dailyLogs.size()}">Nothing logged yet.</p>-->
+<p th:unless="${dailyLogs} and ${dailyLogs.size()}">Nothing logged yet.</p>
 
-<!--<div class="container body-content">-->
-<!--    <h2>Daily Logs</h2>-->
-<!--    <ul>-->
-<!--        <li th:each="dailyLog : ${dailyLogs}">-->
-<!--            <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${dailyLog.date}"></a>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</div>-->
+<div class="container body-content">
+    <h2>Daily Logs</h2>
+    <ul>
+        <li th:each="dailyLog : ${dailyLogs}">
+            <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${dailyLog.date}"></a>
+        </li>
+    </ul>
+</div>
 <div class="container body-content">
     <table class="table-striped">
         <thead>
