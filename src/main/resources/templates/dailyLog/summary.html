@@ -6,64 +6,140 @@
 
 <header th:replace="fragments :: header"></header>
 
-<p th:unless="${dailyLogs} and ${dailyLogs.size()}">Nothing logged yet.</p>
+<div class="container">
+    <div class="row py-5">
+        <div class="col border rounded">
+            <h5 class="py-1">Averages per day:</h5>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Current Month</th>
+                        <th scope="col">Overall</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Mood score:</th>
+                        <td>10</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Energy score:</th>
+                        <td>10</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Alcoholic drinks:</th>
+                        <td>10</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Servings of caffeine:</th>
+                        <td>10</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Hours of sleep:</th>
+                        <td>10</td>
+                        <td>10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">Max Streak</th>
+                    <th scope="col">Current Month</th>
+                    <th scope="col">Overall</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Ate breakfast:</th>
+                    <td>10</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <th scope="row">Exercised:</th>
+                    <td>10</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <th scope="row">No alcohol:</th>
+                    <td>10</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <th scope="row">Slept 7+ hours:</th>
+                    <td>10</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <th scope="row">Went outside:</th>
+                    <td>10</td>
+                    <td>10</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<div class="container body-content">
-    <h2>Daily Logs</h2>
-    <ul>
-        <li th:each="dailyLog : ${dailyLogs}">
-            <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${dailyLog.date}"></a>
-        </li>
-    </ul>
 </div>
-<div class="container body-content">
-    <table class="table-striped">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Max Streak</th>
-        </tr>
-        </thead>
-        <tr>
-            <th>Breakfast:</th>
-            <td th:text="${breakfastStreak}"></td>
-        </tr>
-        <tr>
-            <th>Three meals/day:</th>
-            <td th:text="${threeMealsStreak}"></td>
-        </tr>
-        <tr>
-            <th>No alcohol:</th>
-            <td th:text="${noAlcoholStreak}"></td>
-        </tr>
-    </table>
-</div>
-<div class="container body-content">
-    <table class="table-striped">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Avg Mood With</th>
-            <th>Avg Mood W/o</th>
-            <th>Avg Energy With</th>
-            <th>Avg Energy W/o</th>
-        </tr>
-        </thead>
-        <tr>
-            <th>Breakfast:</th>
-            <td th:text="${moodBreakfastTrue}"></td>
-            <td th:text="${moodBreakfastFalse}"></td>
-            <td th:text="${energyBreakfastTrue}"></td>
-            <td th:text="${energyBreakfastFalse}"></td>
-        </tr>
-        <tr>
-            <th>Breakfast and exercise:</th>
-            <td th:text="${avgMoodBreakfastExercise}"></td>
-            <td th:text="${avgMoodBreakfastExerciseFalse}"></td>
-            <td th:text="${avgEnergyBreakfastExercise}"></td>
-            <td th:text="${avgEnergyBreakfastExerciseFalse}"></td>
-        </tr>
-    </table>
-</div>
+
+
+<p><a href="/dailyLog/all">View All Logs</a></p>
+
+<!--<div class="container body-content">-->
+<!--    <table class="table-striped">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th></th>-->
+<!--            <th>Max Streak</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tr>-->
+<!--            <th>Breakfast:</th>-->
+<!--            <td th:text="${breakfastStreak}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>Three meals/day:</th>-->
+<!--            <td th:text="${threeMealsStreak}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>No alcohol:</th>-->
+<!--            <td th:text="${noAlcoholStreak}"></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</div>-->
+<!--<div class="container body-content">-->
+<!--    <table class="table-striped">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th></th>-->
+<!--            <th>Avg Mood With</th>-->
+<!--            <th>Avg Mood W/o</th>-->
+<!--            <th>Avg Energy With</th>-->
+<!--            <th>Avg Energy W/o</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tr>-->
+<!--            <th>Breakfast:</th>-->
+<!--            <td th:text="${moodBreakfastTrue}"></td>-->
+<!--            <td th:text="${moodBreakfastFalse}"></td>-->
+<!--            <td th:text="${energyBreakfastTrue}"></td>-->
+<!--            <td th:text="${energyBreakfastFalse}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>Breakfast and exercise:</th>-->
+<!--            <td th:text="${avgMoodBreakfastExercise}"></td>-->
+<!--            <td th:text="${avgMoodBreakfastExerciseFalse}"></td>-->
+<!--            <td th:text="${avgEnergyBreakfastExercise}"></td>-->
+<!--            <td th:text="${avgEnergyBreakfastExerciseFalse}"></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</div>-->
 </body>
 </html>

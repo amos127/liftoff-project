@@ -9,7 +9,7 @@
 <table class="table table-striped">
     <tr>
         <th>Date</th>
-        <td th:text="${dailyLog.date}"></td>
+        <td th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></td>
     </tr>
     <tr>
         <th>Mood Score</th>
@@ -21,19 +21,23 @@
     </tr>
     <tr>
         <th>Ate Breakfast?</th>
-        <td th:text="${dailyLog.ateBreakfast}"></td>
+        <td th:if="${dailyLog.ateBreakfast}">Yes</td>
+        <td th:if="${!dailyLog.ateLunch}">No</td>
     </tr>
     <tr>
         <th>Ate Lunch?</th>
-        <td th:text="${dailyLog.ateLunch}"></td>
+        <td th:if="${dailyLog.ateLunch}">Yes</td>
+        <td th:if="${!dailyLog.ateLunch}">No</td>
     </tr>
     <tr>
         <th>Ate Dinner?</th>
-        <td th:text="${dailyLog.ateDinner}"></td>
+        <td th:if="${dailyLog.ateDinner}">Yes</td>
+        <td th:if="${!dailyLog.ateDinner}">No</td>
     </tr>
     <tr>
         <th>Took Medicine?</th>
-        <td th:text="${dailyLog.tookMedicine}"></td>
+        <td th:if="${dailyLog.tookMedicine}">Yes</td>
+        <td th:if="${!dailyLog.tookMedicine}">No</td>
     </tr>
     <tr>
         <th>Number of Alcoholic Drinks</th>
@@ -45,11 +49,13 @@
     </tr>
     <tr>
         <th>Exercised?</th>
-        <td th:text="${dailyLog.didExercise}"></td>
+        <td th:if="${dailyLog.didExercise}">Yes</td>
+        <td th:if="${!dailyLog.didExercise}">No</td>
     </tr>
     <tr>
         <th>Went Outside?</th>
-        <td th:text="${dailyLog.wentOutside}"></td>
+        <td th:if="${dailyLog.wentOutside}">Yes</td>
+        <td th:if="${!dailyLog.wentOutside}">No</td>
     </tr>
     <tr>
         <td>

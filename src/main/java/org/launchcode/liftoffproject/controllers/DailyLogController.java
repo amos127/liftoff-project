@@ -67,6 +67,12 @@ public class DailyLogController {
         return "index";
     }
 
+    @GetMapping("all")
+    public String displayAll(Model model) {
+        model.addAttribute("dailyLogs", dailyLogRepository.findAll());
+        return "dailyLog/all";
+    }
+
     @GetMapping("summary")
     public String displaySummary(Model model) {
         model.addAttribute("dailyLogs", dailyLogRepository.findAll());
