@@ -71,7 +71,18 @@ public class DailyLogController {
     @GetMapping("all")
     public String displayAll(Model model) {
         model.addAttribute("dailyLogs", dailyLogRepository.findAll());
-        model.addAttribute("january", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-01-01"), Date.valueOf("2021-03-01")));
+        model.addAttribute("january", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-01-01"), Date.valueOf("2021-01-31")));
+        model.addAttribute("february", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-02-01"), Date.valueOf("2021-02-28")));
+        model.addAttribute("march", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-03-01"), Date.valueOf("2021-03-31")));
+        model.addAttribute("april", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-04-01"), Date.valueOf("2021-04-30")));
+        model.addAttribute("may", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-05-01"), Date.valueOf("2021-05-31")));
+        model.addAttribute("june", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-06-01"), Date.valueOf("2021-06-30")));
+        model.addAttribute("july", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-07-01"), Date.valueOf("2021-07-31")));
+        model.addAttribute("august", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-08-01"), Date.valueOf("2021-08-31")));
+        model.addAttribute("september", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-09-01"), Date.valueOf("2021-09-30")));
+        model.addAttribute("october", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-10-01"), Date.valueOf("2021-10-31")));
+        model.addAttribute("november", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-11-01"), Date.valueOf("2021-11-30")));
+        model.addAttribute("december", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-12-01"), Date.valueOf("2021-12-31")));
         return "dailyLog/all";
     }
 
