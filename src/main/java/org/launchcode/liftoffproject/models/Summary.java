@@ -1,5 +1,6 @@
 package org.launchcode.liftoffproject.models;
 
+import java.sql.Date;
 import java.util.List;
 
 public class Summary {
@@ -145,4 +146,5 @@ public class Summary {
             }
         } return sum/conditionCount;
     }
+
 }

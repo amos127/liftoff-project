@@ -17,5 +17,26 @@
     </ul>
 </div>
 
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    January
+</button>
+
+<div class="collapse" id="collapseExample">
+    <ul>
+        <li th:each="dailyLog : ${january}">
+            <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+        </li>
+    </ul>
+</div>
+
+<div class="container body-content">
+    <h3>January</h3>
+    <ul>
+        <li th:each="dailyLog : ${january}">
+            <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+        </li>
+    </ul>
+</div>
+
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.Optional;
 
 @Controller
@@ -70,6 +71,7 @@ public class DailyLogController {
     @GetMapping("all")
     public String displayAll(Model model) {
         model.addAttribute("dailyLogs", dailyLogRepository.findAll());
+        model.addAttribute("january", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-01-01"), Date.valueOf("2021-03-01")));
         return "dailyLog/all";
     }
 
