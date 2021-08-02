@@ -2,13 +2,20 @@ package org.launchcode.liftoffproject.controllers;
 
 import org.launchcode.liftoffproject.data.DailyLogRepository;
 import org.launchcode.liftoffproject.models.DailyLog;
-import org.launchcode.liftoffproject.models.Summary;
+import org.launchcode.liftoffproject.models.Stats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.WeekFields;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -20,13 +27,16 @@ public class DailyLogController {
 
     @GetMapping("add")
     public String displayAddDailyLog(Model model) {
-        model.addAttribute("title", "Add Daily Log");
         model.addAttribute(new DailyLog());
         return "dailyLog/add";
     }
 
     @PostMapping("add")
-    public String processAddDailyLog(@ModelAttribute DailyLog newDailyLog) {
+    public String processAddDailyLog(@ModelAttribute @Valid DailyLog newDailyLog,
+                                     Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            return "dailyLog/add";
+        }
         dailyLogRepository.save(newDailyLog);
         return "dailyLog/view";
     }
@@ -88,26 +98,41 @@ public class DailyLogController {
 
     @GetMapping("summary")
     public String displaySummary(Model model) {
-        model.addAttribute("dailyLogs", dailyLogRepository.findAll());
-        model.addAttribute("breakfastStreak", Summary.maxBreakfastStreak(dailyLogRepository.findAll()));
-        model.addAttribute("threeMealsStreak", Summary.maxThreeMealsStreak(dailyLogRepository.findAll()));
-        model.addAttribute("noAlcoholStreak", Summary.maxZeroAlcoholStreak(dailyLogRepository.findAll()));
-        model.addAttribute("moodBreakfastTrue",
-                Summary.averageMoodByBreakfast(dailyLogRepository.findAll(), true));
-        model.addAttribute("moodBreakfastFalse",
-                Summary.averageMoodByBreakfast(dailyLogRepository.findAll(), false));
-        model.addAttribute("energyBreakfastTrue",
-                Summary.averageEnergyByBreakfast(dailyLogRepository.findAll(), true));
-        model.addAttribute("energyBreakfastFalse",
-                Summary.averageEnergyByBreakfast(dailyLogRepository.findAll(), false));
-        model.addAttribute("avgMoodBreakfastExercise",
-                Summary.averageMoodBreakfastExercise(dailyLogRepository.findAll()));
-        model.addAttribute("avgMoodBreakfastExerciseFalse",
-                Summary.averageMoodBreakfastExerciseFalse(dailyLogRepository.findAll()));
-        model.addAttribute("avgEnergyBreakfastExercise",
-                Summary.averageEnergyBreakfastExercise(dailyLogRepository.findAll()));
-        model.addAttribute("avgEnergyBreakfastExerciseFalse",
-                Summary.averageEnergyBreakfastExerciseFalse(dailyLogRepository.findAll()));
+
+        Iterable<DailyLog> allLogs = dailyLogRepository.findAll();
+
+        List<DailyLog> currentWeekLogs = new ArrayList<>();
+        for (DailyLog log : allLogs) {
+            LocalDate localDate = log.getDate().toLocalDate();
+            int weekOfYear = localDate.get(WeekFields.of(Locale.ROOT).weekOfYear());
+            LocalDate today = LocalDate.now();
+            int currentWeekOfYear = today.get(WeekFields.of(Locale.ROOT).weekOfYear());
+
+            if (weekOfYear == currentWeekOfYear) {
+                currentWeekLogs.add(log);
+            } else {
+                continue;
+            }
+        }
+
+        model.addAttribute("avgMoodOverall", Stats.avgMood(allLogs));
+        model.addAttribute("avgMoodCurrentWeek", Stats.avgMood(currentWeekLogs));
+        model.addAttribute("avgEnergyOverall", Stats.avgEnergy(allLogs));
+        model.addAttribute("avgEnergyCurrentWeek", Stats.avgEnergy(currentWeekLogs));
+        model.addAttribute("avgHrsSleepOverall", Stats.avgHoursSlept(allLogs));
+        model.addAttribute("avgHrsSleepCurrentWeek", Stats.avgHoursSlept(currentWeekLogs));
+        model.addAttribute("avgAlcoholOverall", Stats.avgAlcohol(allLogs));
+        model.addAttribute("avgAlcoholCurrentWeek", Stats.avgAlcohol(currentWeekLogs));
+        model.addAttribute("avgCaffeineOverall", Stats.avgCaffeine(allLogs));
+        model.addAttribute("avgCaffeineCurrentWeek", Stats.avgCaffeine(currentWeekLogs));
+        model.addAttribute("daysExercisedOverall", Stats.daysExercised(allLogs));
+        model.addAttribute("daysExercisedCurrentWeek", Stats.daysExercised(currentWeekLogs));
+
+        model.addAttribute("maxStreakBreakfast", Stats.maxBreakfastStreak(allLogs));
+        model.addAttribute("maxStreakExercise", Stats.maxExerciseStreak(allLogs));
+        model.addAttribute("maxStreakAlcohol", Stats.maxStreakLessThanThreeDrinks(allLogs));
+        model.addAttribute("maxStreakSleep", Stats.maxStreakSleptOverSevenHours(allLogs));
+
         return "dailyLog/summary";
     }
 }

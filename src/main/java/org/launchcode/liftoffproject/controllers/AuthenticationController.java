@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Controller
@@ -116,7 +117,7 @@ public class AuthenticationController {
         }
 
         setUserInSession(request.getSession(), theUser);
-
+        model.addAttribute("user", theUser);
         return "redirect:";
     }
 
@@ -125,4 +126,5 @@ public class AuthenticationController {
         request.getSession().invalidate();
         return "redirect:/login";
     }
+
 }

@@ -7,6 +7,7 @@
 <header th:replace="fragments :: header"></header>
 
 <div class="container">
+    <h1 class="pt-3">Summary</h1>
     <div class="row py-5">
         <div class="col border rounded">
             <h5 class="py-1">Averages per day:</h5>
@@ -14,44 +15,50 @@
                 <thead>
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">Current Month</th>
+                        <th scope="col">Current Week</th>
                         <th scope="col">Overall</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th scope="row">Mood score:</th>
-                        <td>10</td>
-                        <td>10</td>
+                        <td th:text="${avgMoodCurrentWeek}">10</td>
+                        <td th:text="${avgMoodOverall}">10</td>
                     </tr>
                     <tr>
                         <th scope="row">Energy score:</th>
-                        <td>10</td>
-                        <td>10</td>
+                        <td th:text="${avgEnergyCurrentWeek}">10</td>
+                        <td th:text="${avgEnergyOverall}">10</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Hours of Sleep:</th>
+                        <td th:text="${avgHrsSleepCurrentWeek}">10</td>
+                        <td th:text="${avgHrsSleepOverall}">10</td>
                     </tr>
                     <tr>
                         <th scope="row">Alcoholic drinks:</th>
-                        <td>10</td>
-                        <td>10</td>
+                        <td th:text="${avgAlcoholCurrentWeek}">10</td>
+                        <td th:text="${avgAlcoholOverall}">10</td>
                     </tr>
                     <tr>
                         <th scope="row">Servings of caffeine:</th>
-                        <td>10</td>
-                        <td>10</td>
+                        <td th:text="${avgCaffeineCurrentWeek}">10</td>
+                        <td th:text="${avgCaffeineOverall}">10</td>
                     </tr>
                     <tr>
-                        <th scope="row">Hours of sleep:</th>
-                        <td>10</td>
-                        <td>10</td>
+                        <th scope="row">Days Exercised (total):</th>
+                        <td th:text="${daysExercisedCurrentWeek}">10</td>
+                        <td th:text="${daysExercisedOverall}">10</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="col">
+            <h5 class="py-1">Max Streaks (Days in a row):</h5>
             <table class="table table-dark">
                 <thead>
                 <tr>
-                    <th scope="col">Max Streak</th>
+                    <th scope="col"></th>
                     <th scope="col">Current Month</th>
                     <th scope="col">Overall</th>
                 </tr>
@@ -60,27 +67,22 @@
                 <tr>
                     <th scope="row">Ate breakfast:</th>
                     <td>10</td>
-                    <td>10</td>
+                    <td th:text="${maxStreakBreakfast}">10</td>
                 </tr>
                 <tr>
                     <th scope="row">Exercised:</th>
                     <td>10</td>
-                    <td>10</td>
+                    <td th:text="${maxStreakExercise}">10</td>
                 </tr>
                 <tr>
-                    <th scope="row">No alcohol:</th>
+                    <th scope="row">Two or fewer drinks:</th>
                     <td>10</td>
-                    <td>10</td>
+                    <td th:text="${maxStreakAlcohol}">10</td>
                 </tr>
                 <tr>
                     <th scope="row">Slept 7+ hours:</th>
                     <td>10</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <th scope="row">Went outside:</th>
-                    <td>10</td>
-                    <td>10</td>
+                    <td th:text="${maxStreakSleep}">10</td>
                 </tr>
                 </tbody>
             </table>
@@ -89,31 +91,8 @@
 
 </div>
 
-
 <p><a href="/dailyLog/all">View All Logs</a></p>
 
-<!--<div class="container body-content">-->
-<!--    <table class="table-striped">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th></th>-->
-<!--            <th>Max Streak</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tr>-->
-<!--            <th>Breakfast:</th>-->
-<!--            <td th:text="${breakfastStreak}"></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <th>Three meals/day:</th>-->
-<!--            <td th:text="${threeMealsStreak}"></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <th>No alcohol:</th>-->
-<!--            <td th:text="${noAlcoholStreak}"></td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</div>-->
 <!--<div class="container body-content">-->
 <!--    <table class="table-striped">-->
 <!--        <thead>-->

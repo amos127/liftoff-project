@@ -1,6 +1,7 @@
 package org.launchcode.liftoffproject.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.sql.Date;
 import java.util.Objects;
@@ -16,26 +17,34 @@ public class DailyLog {
 
     private int moodScore;
     private int energyScore;
+
+    @Min(value = 0, message = "Must be between 0-24")
+    @Max(value = 24, message = "Must be between 0-24")
+    private double hoursSlept;
+
     private boolean ateBreakfast;
     private boolean ateLunch;
     private boolean ateDinner;
-    private boolean tookMedicine;
+
+    @PositiveOrZero(message = "Must be zero or higher")
     private int alcoholicDrinks;
+
+    @PositiveOrZero(message = "Must be zero or higher")
     private int caffeinatedDrinks;
     private boolean didExercise;
     private boolean wentOutside;
 
-    public DailyLog(Date date, int moodScore, int energyScore, boolean ateBreakfast,
+    public DailyLog(Date date, int moodScore, int energyScore, double hoursSlept, boolean ateBreakfast,
                     boolean ateLunch, boolean ateDinner,
-                    boolean tookMedicine, int alcoholicDrinks, int caffeinatedDrinks,
+                    int alcoholicDrinks, int caffeinatedDrinks,
                     boolean didExercise, boolean wentOutside) {
         this.date = date;
         this.moodScore = moodScore;
+        this.hoursSlept = hoursSlept;
         this.energyScore = energyScore;
         this.ateBreakfast = ateBreakfast;
         this.ateLunch = ateLunch;
         this.ateDinner = ateDinner;
-        this.tookMedicine = tookMedicine;
         this.alcoholicDrinks = alcoholicDrinks;
         this.caffeinatedDrinks = caffeinatedDrinks;
         this.didExercise = didExercise;
@@ -76,6 +85,14 @@ public class DailyLog {
         this.energyScore = energyScore;
     }
 
+    public double getHoursSlept() {
+        return hoursSlept;
+    }
+
+    public void setHoursSlept(double hoursSlept) {
+        this.hoursSlept = hoursSlept;
+    }
+
     public boolean isAteBreakfast() {
         return ateBreakfast;
     }
@@ -98,14 +115,6 @@ public class DailyLog {
 
     public void setAteDinner(boolean ateDinner) {
         this.ateDinner = ateDinner;
-    }
-
-    public boolean isTookMedicine() {
-        return tookMedicine;
-    }
-
-    public void setTookMedicine(boolean tookMedicine) {
-        this.tookMedicine = tookMedicine;
     }
 
     public int getAlcoholicDrinks() {

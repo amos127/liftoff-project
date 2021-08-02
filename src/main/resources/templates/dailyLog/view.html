@@ -6,68 +6,68 @@
 
 <header th:replace="fragments :: header"></header>
 
-<table class="table table-striped">
-    <tr>
-        <th>Date</th>
-        <td th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></td>
-    </tr>
-    <tr>
-        <th>Mood Score</th>
-        <td th:text="${dailyLog.moodScore}"></td>
-    </tr>
-    <tr>
-        <th>Energy Score</th>
-        <td th:text="${dailyLog.energyScore}"></td>
-    </tr>
-    <tr>
-        <th>Ate Breakfast?</th>
-        <td th:if="${dailyLog.ateBreakfast}">Yes</td>
-        <td th:if="${!dailyLog.ateLunch}">No</td>
-    </tr>
-    <tr>
-        <th>Ate Lunch?</th>
-        <td th:if="${dailyLog.ateLunch}">Yes</td>
-        <td th:if="${!dailyLog.ateLunch}">No</td>
-    </tr>
-    <tr>
-        <th>Ate Dinner?</th>
-        <td th:if="${dailyLog.ateDinner}">Yes</td>
-        <td th:if="${!dailyLog.ateDinner}">No</td>
-    </tr>
-    <tr>
-        <th>Took Medicine?</th>
-        <td th:if="${dailyLog.tookMedicine}">Yes</td>
-        <td th:if="${!dailyLog.tookMedicine}">No</td>
-    </tr>
-    <tr>
-        <th>Number of Alcoholic Drinks</th>
-        <td th:text="${dailyLog.alcoholicDrinks}"></td>
-    </tr>
-    <tr>
-        <th>Number of Caffeinated Drinks</th>
-        <td th:text="${dailyLog.caffeinatedDrinks}"></td>
-    </tr>
-    <tr>
-        <th>Exercised?</th>
-        <td th:if="${dailyLog.didExercise}">Yes</td>
-        <td th:if="${!dailyLog.didExercise}">No</td>
-    </tr>
-    <tr>
-        <th>Went Outside?</th>
-        <td th:if="${dailyLog.wentOutside}">Yes</td>
-        <td th:if="${!dailyLog.wentOutside}">No</td>
-    </tr>
-    <tr>
-        <td>
-            <a th:href="@{'/dailyLog/edit/' + ${dailyLog.id}}">Edit</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a th:href="@{'/dailyLog/delete/' + ${dailyLog.id}}">Delete</a>
-        </td>
-    </tr>
-</table>
-
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <th>Date</th>
+            <td th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></td>
+        </tr>
+        <tr>
+            <th>Mood Score</th>
+            <td th:text="${dailyLog.moodScore}"></td>
+        </tr>
+        <tr>
+            <th>Energy Score</th>
+            <td th:text="${dailyLog.energyScore}"></td>
+        </tr>
+        <tr>
+            <th>Hours of Sleep Previous Night</th>
+            <td th:text="${dailyLog.hoursSlept}"></td>
+        </tr>
+        <tr>
+            <th>Had Breakfast?</th>
+            <td th:if="${dailyLog.ateBreakfast}">Yes</td>
+            <td th:if="${!dailyLog.ateBreakfast}">No</td>
+        </tr>
+        <tr>
+            <th>Had Lunch?</th>
+            <td th:if="${dailyLog.ateLunch}">Yes</td>
+            <td th:if="${!dailyLog.ateLunch}">No</td>
+        </tr>
+        <tr>
+            <th>Had Dinner?</th>
+            <td th:if="${dailyLog.ateDinner}">Yes</td>
+            <td th:if="${!dailyLog.ateDinner}">No</td>
+        </tr>
+        <tr>
+            <th>Number of Alcoholic Drinks</th>
+            <td th:text="${dailyLog.alcoholicDrinks}"></td>
+        </tr>
+        <tr>
+            <th>Number of Caffeinated Drinks</th>
+            <td th:text="${dailyLog.caffeinatedDrinks}"></td>
+        </tr>
+        <tr>
+            <th>Exercised?</th>
+            <td th:if="${dailyLog.didExercise}">Yes</td>
+            <td th:if="${!dailyLog.didExercise}">No</td>
+        </tr>
+        <tr>
+            <th>Went Outside?</th>
+            <td th:if="${dailyLog.wentOutside}">Yes</td>
+            <td th:if="${!dailyLog.wentOutside}">No</td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{'/dailyLog/edit/' + ${dailyLog.id}}">Edit</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{'/dailyLog/delete/' + ${dailyLog.id}}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

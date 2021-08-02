@@ -6,185 +6,190 @@
 
 <header th:replace="fragments :: header"></header>
 
-<p th:unless="${dailyLogs} and ${dailyLogs.size()}">Nothing logged yet.</p>
-
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseJanuary" aria-expanded="false" aria-controls="collapseJanuary">
-        January
-    </button>
-
-    <div class="collapse" id="collapseJanuary">
-        <ul>
-            <li th:each="dailyLog : ${january}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${january.size()}">Nothing logged.</p>
+<div class="container">
+    <h1 class="py-3">View All</h1>
+    <div>
+    <p th:unless="${dailyLogs} and ${dailyLogs.size()}">Nothing logged yet.</p>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFebruary" aria-expanded="false" aria-controls="collapseFebruary">
-        February
-    </button>
+    <div th:if="${january.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseJanuary" aria-expanded="false" aria-controls="collapseJanuary">
+            January
+        </button>
 
-    <div class="collapse" id="collapseFebruary">
-        <ul>
-            <li th:each="dailyLog : ${february}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${february.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseJanuary">
+            <ul>
+                <li th:each="dailyLog : ${january}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${january.size()}">Nothing logged.</p>
+        </div>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMarch" aria-expanded="false" aria-controls="collapseMarch">
-        March
-    </button>
+    <div th:if="${february.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFebruary" aria-expanded="false" aria-controls="collapseFebruary">
+            February
+        </button>
 
-    <div class="collapse" id="collapseMarch">
-        <ul>
-            <li th:each="dailyLog : ${march}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${march.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseFebruary">
+            <ul>
+                <li th:each="dailyLog : ${february}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${february.size()}">Nothing logged.</p>
+        </div>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseApril" aria-expanded="false" aria-controls="collapseArpil">
-        April
-    </button>
+    <div th:if="${march.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMarch" aria-expanded="false" aria-controls="collapseMarch">
+            March
+        </button>
 
-    <div class="collapse" id="collapseApril">
-        <ul>
-            <li th:each="dailyLog : ${april}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${april.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseMarch">
+            <ul>
+                <li th:each="dailyLog : ${march}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${march.size()}">Nothing logged.</p>
+        </div>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMay" aria-expanded="false" aria-controls="collapseMay">
-        May
-    </button>
+    <div th:if="${april.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseApril" aria-expanded="false" aria-controls="collapseArpil">
+            April
+        </button>
 
-    <div class="collapse" id="collapseMay">
-        <ul>
-            <li th:each="dailyLog : ${may}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${may.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseApril">
+            <ul>
+                <li th:each="dailyLog : ${april}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${april.size()}">Nothing logged.</p>
+        </div>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseJune" aria-expanded="false" aria-controls="collapseJune">
-        June
-    </button>
+    <div th:if="${may.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMay" aria-expanded="false" aria-controls="collapseMay">
+            May
+        </button>
 
-    <div class="collapse" id="collapseJune">
-        <ul>
-            <li th:each="dailyLog : ${june}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${june.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseMay">
+            <ul>
+                <li th:each="dailyLog : ${may}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${may.size()}">Nothing logged.</p>
+        </div>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseJuly" aria-expanded="false" aria-controls="collapseJuly">
-        July
-    </button>
+    <div th:if="${june.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseJune" aria-expanded="false" aria-controls="collapseJune">
+            June
+        </button>
 
-    <div class="collapse" id="collapseJuly">
-        <ul>
-            <li th:each="dailyLog : ${july}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${july.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseJune">
+            <ul>
+                <li th:each="dailyLog : ${june}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${june.size()}">Nothing logged.</p>
+        </div>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAugust" aria-expanded="false" aria-controls="collapseAugust">
-        August
-    </button>
+    <div th:if="${july.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseJuly" aria-expanded="false" aria-controls="collapseJuly">
+            July
+        </button>
 
-    <div class="collapse" id="collapseAugust">
-        <ul>
-            <li th:each="dailyLog : ${august}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${august.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseJuly">
+            <ul>
+                <li th:each="dailyLog : ${july}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${july.size()}">Nothing logged.</p>
+        </div>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseSeptember" aria-expanded="false" aria-controls="collapseSeptember">
-        September
-    </button>
+    <div th:if="${august.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAugust" aria-expanded="false" aria-controls="collapseAugust">
+            August
+        </button>
 
-    <div class="collapse" id="collapseSeptember">
-        <ul>
-            <li th:each="dailyLog : ${september}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${september.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseAugust">
+            <ul>
+                <li th:each="dailyLog : ${august}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${august.size()}">Nothing logged.</p>
+        </div>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOctober" aria-expanded="false" aria-controls="collapseOctober">
-        October
-    </button>
+    <div th:if="${september.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseSeptember" aria-expanded="false" aria-controls="collapseSeptember">
+            September
+        </button>
 
-    <div class="collapse" id="collapseOctober">
-        <ul>
-            <li th:each="dailyLog : ${october}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${october.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseSeptember">
+            <ul>
+                <li th:each="dailyLog : ${september}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${september.size()}">Nothing logged.</p>
+        </div>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseNovember" aria-expanded="false" aria-controls="collapseNovember">
-        November
-    </button>
+    <div th:if="${october.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOctober" aria-expanded="false" aria-controls="collapseOctober">
+            October
+        </button>
 
-    <div class="collapse" id="collapseNovember">
-        <ul>
-            <li th:each="dailyLog : ${november}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${november.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseOctober">
+            <ul>
+                <li th:each="dailyLog : ${october}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${october.size()}">Nothing logged.</p>
+        </div>
     </div>
-</div>
 
-<div>
-    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDecember" aria-expanded="false" aria-controls="collapseDecember">
-        December
-    </button>
+    <div th:if="${november.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseNovember" aria-expanded="false" aria-controls="collapseNovember">
+            November
+        </button>
 
-    <div class="collapse" id="collapseDecember">
-        <ul>
-            <li th:each="dailyLog : ${december}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-        <p th:unless="${dailyLogs} and ${december.size()}">Nothing logged.</p>
+        <div class="collapse" id="collapseNovember">
+            <ul>
+                <li th:each="dailyLog : ${november}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${november.size()}">Nothing logged.</p>
+        </div>
+    </div>
+
+    <div th:if="${december.size() > 0}">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDecember" aria-expanded="false" aria-controls="collapseDecember">
+            December
+        </button>
+
+        <div class="collapse" id="collapseDecember">
+            <ul>
+                <li th:each="dailyLog : ${december}">
+                    <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+                </li>
+            </ul>
+            <p th:unless="${dailyLogs} and ${december.size()}">Nothing logged.</p>
+        </div>
     </div>
 </div>
 

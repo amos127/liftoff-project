@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Summary {
 
+
     //finds the maximum streak of "yes" responses to boolean questions
     public static int maxBreakfastStreak(Iterable<DailyLog> dailyLogs) {
 

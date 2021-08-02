@@ -11,39 +11,27 @@
         <label>Date:
             <input type="date" th:field="${dailyLog.date}" class="form-control">
         </label>
-<!--        <p class="error" th:errors="${event.name}"></p>-->
+        <span th:errors="${dailyLog.date}" class="error"></span>
     </div>
     <div class="form-group">
         <label>Mood Score:
             <select th:field="${dailyLog.moodScore}">
-                <option th:value="1">1</option>
-                <option th:value="2">2</option>
-                <option th:value="3">3</option>
-                <option th:value="4">4</option>
-                <option th:value="5">5</option>
-                <option th:value="6">6</option>
-                <option th:value="7">7</option>
-                <option th:value="8">8</option>
-                <option th:value="9">9</option>
-                <option th:value="10">10</option>
+                <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"></option>
             </select>
         </label>
     </div>
     <div class="form-group">
         <label>Energy Score:
             <select th:field="${dailyLog.energyScore}">
-                <option th:value="1">1</option>
-                <option th:value="2">2</option>
-                <option th:value="3">3</option>
-                <option th:value="4">4</option>
-                <option th:value="5">5</option>
-                <option th:value="6">6</option>
-                <option th:value="7">7</option>
-                <option th:value="8">8</option>
-                <option th:value="9">9</option>
-                <option th:value="10">10</option>
+                <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"></option>
             </select>
         </label>
+    </div>
+    <div class="form-group">
+        <label>Hours slept last night:
+            <input th:field="${dailyLog.hoursSlept}" class="form-control">
+        </label>
+        <span th:errors="${dailyLog.hoursSlept}" class="error"></span>
     </div>
     <div class="form-group">
         <label>Did you eat breakfast?
@@ -70,24 +58,16 @@
         </label>
     </div>
     <div class="form-group">
-        <label>Did you take your medicine?
-            <select th:field="${dailyLog.tookMedicine}">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
         <label>Number of alcoholic drinks:
             <input th:field="${dailyLog.alcoholicDrinks}" class="form-control">
         </label>
-        <!--        <p class="error" th:errors="${event.name}"></p>-->
+        <span th:errors="${dailyLog.alcoholicDrinks}" class="error"></span>
     </div>
     <div class="form-group">
         <label>Number of caffeinated drinks:
             <input th:field="${dailyLog.caffeinatedDrinks}" class="form-control">
         </label>
-        <!--        <p class="error" th:errors="${event.name}"></p>-->
+        <span th:errors="${dailyLog.caffeinatedDrinks}" class="error"></span>
     </div>
     <div class="form-group">
         <label>Did you exercise?
@@ -96,7 +76,6 @@
                 <option th:value="false" th:text="No"></option>
             </select>
         </label>
-        <!--        <p class="error" th:errors="${event.name}"></p>-->
     </div>
     <div class="form-group">
         <label>Did you spend time outside?
