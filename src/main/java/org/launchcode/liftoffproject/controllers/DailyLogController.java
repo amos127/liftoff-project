@@ -133,6 +133,15 @@ public class DailyLogController {
         model.addAttribute("maxStreakAlcohol", Stats.maxStreakLessThanThreeDrinks(allLogs));
         model.addAttribute("maxStreakSleep", Stats.maxStreakSleptOverSevenHours(allLogs));
 
+        model.addAttribute("avgMoodBreakfastTrue", Stats.avgMood(dailyLogRepository.findAllByAteBreakfastTrue()));
+        model.addAttribute("avgEnergyBreakfastTrue", Stats.avgEnergy(dailyLogRepository.findAllByAteBreakfastTrue()));
+        model.addAttribute("avgMoodExerciseTrue", Stats.avgMood(dailyLogRepository.findAllByDidExerciseTrue()));
+        model.addAttribute("avgEnergyExerciseTrue", Stats.avgEnergy(dailyLogRepository.findAllByDidExerciseTrue()));
+        model.addAttribute("avgMoodSleptSeven", Stats.avgMood(dailyLogRepository.findAllByHoursSleptGreaterThanEqual(Double.valueOf(7))));
+        model.addAttribute("avgEnergySleptSeven", Stats.avgEnergy(dailyLogRepository.findAllByHoursSleptGreaterThanEqual(Double.valueOf(7))));
+        model.addAttribute("avgMoodOutsideTrue", Stats.avgMood(dailyLogRepository.findAllByWentOutsideTrue()));
+        model.addAttribute("avgEnergyOutsideTrue", Stats.avgEnergy(dailyLogRepository.findAllByWentOutsideTrue()));
+
         return "dailyLog/summary";
     }
 }
