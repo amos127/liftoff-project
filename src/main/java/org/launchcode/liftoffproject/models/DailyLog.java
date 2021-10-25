@@ -4,10 +4,15 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class DailyLog {
+
+    @ManyToOne
+    private User user;
 
     @Id
     @GeneratedValue
@@ -34,10 +39,14 @@ public class DailyLog {
     private boolean didExercise;
     private boolean wentOutside;
 
-    public DailyLog(Date date, int moodScore, int energyScore, double hoursSlept, boolean ateBreakfast,
+    @ManyToMany
+    private final List<Tag> tags = new ArrayList<>();
+
+    public DailyLog(User user, Date date, int moodScore, int energyScore, double hoursSlept, boolean ateBreakfast,
                     boolean ateLunch, boolean ateDinner,
                     int alcoholicDrinks, int caffeinatedDrinks,
                     boolean didExercise, boolean wentOutside) {
+        this.user = user;
         this.date = date;
         this.moodScore = moodScore;
         this.hoursSlept = hoursSlept;
@@ -52,6 +61,14 @@ public class DailyLog {
     }
 
     public DailyLog() {}
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;
@@ -147,6 +164,14 @@ public class DailyLog {
 
     public void setWentOutside(boolean wentOutside) {
         this.wentOutside = wentOutside;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
     }
 
     @Override

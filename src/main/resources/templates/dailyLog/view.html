@@ -58,6 +58,11 @@
             <td th:if="${!dailyLog.wentOutside}">No</td>
         </tr>
         <tr>
+            <th>Tags: </th>
+            <td th:value="${dailyLog.tags}"
+                th:text="${dailyLog.tags}"></td>
+        </tr>
+        <tr>
             <td>
                 <a th:href="@{'/dailyLog/edit/' + ${dailyLog.id}}">Edit</a>
             </td>

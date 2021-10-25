@@ -88,6 +88,16 @@
             </select>
         </label>
     </div>
+    <div>
+        <label>Add tags:
+            <select th:field="${dailyLogTag.tag}">
+                <option th:each="tag : ${tags}"
+                        th:value="${tag.id}"
+                        th:text="${tag.name}">
+                </option>
+            </select>
+        </label>
+    </div>
     <div class="form-group">
         <input type="submit" value="Submit" class="btn btn-success">
     </div>

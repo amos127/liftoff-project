@@ -1,8 +1,12 @@
 package org.launchcode.liftoffproject.controllers;
 
 import org.launchcode.liftoffproject.data.DailyLogRepository;
+import org.launchcode.liftoffproject.data.TagRepository;
+import org.launchcode.liftoffproject.data.UserRepository;
 import org.launchcode.liftoffproject.models.DailyLog;
 import org.launchcode.liftoffproject.models.Stats;
+import org.launchcode.liftoffproject.models.Tag;
+import org.launchcode.liftoffproject.models.dto.DailyLogTagDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,22 +27,37 @@ import java.util.Optional;
 public class DailyLogController {
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     private DailyLogRepository dailyLogRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
 
     @GetMapping("add")
     public String displayAddDailyLog(Model model) {
+        DailyLogTagDTO dailyLogTag = new DailyLogTagDTO();
         model.addAttribute(new DailyLog());
+        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("dailyLogTag", dailyLogTag);
+        model.addAttribute("tags", tagRepository.findAll());
         return "dailyLog/add";
     }
 
     @PostMapping("add")
     public String processAddDailyLog(@ModelAttribute @Valid DailyLog newDailyLog,
+                                     @ModelAttribute @Valid DailyLogTagDTO dailyLogTag,
                                      Errors errors, Model model) {
-        if (errors.hasErrors()) {
-            return "dailyLog/add";
+        if (!errors.hasErrors()) {
+            Tag tag = dailyLogTag.getTag();
+            if (!newDailyLog.getTags().contains(tag)) {
+                newDailyLog.addTag(tag);
+            }
+            dailyLogRepository.save(newDailyLog);
+            return "dailyLog/view";
         }
-        dailyLogRepository.save(newDailyLog);
-        return "dailyLog/view";
+            return "dailyLog/add";
     }
 
     @GetMapping("view/{id}")
@@ -55,10 +74,13 @@ public class DailyLogController {
 
     @GetMapping("edit/{id}")
     public String editDailyLog(Model model, @PathVariable int id) {
+        DailyLogTagDTO dailyLogTag = new DailyLogTagDTO();
         Optional optDailyLog = dailyLogRepository.findById(id);
         if (optDailyLog.isPresent()) {
             DailyLog dailyLog = (DailyLog) optDailyLog.get();
             model.addAttribute("dailyLog", dailyLog);
+            model.addAttribute("dailyLogTag", dailyLogTag);
+            model.addAttribute("tags", tagRepository.findAll());
             return "dailyLog/edit";
         } else {
             return "redirect:../";
@@ -66,9 +88,17 @@ public class DailyLogController {
     }
 
     @PostMapping("edit/{id}")
-    public String processEditDailyLog(@PathVariable int id, @ModelAttribute DailyLog dailyLog) {
-        dailyLog.setId(id);
-        dailyLogRepository.save(dailyLog);
+    public String processEditDailyLog(@PathVariable int id, @ModelAttribute DailyLog dailyLog,
+                                      @ModelAttribute @Valid DailyLogTagDTO dailyLogTag,
+                                      Errors errors) {
+        if (!errors.hasErrors()) {
+            Tag tag = dailyLogTag.getTag();
+            if (!dailyLog.getTags().contains(tag)) {
+                dailyLog.addTag(tag);
+            }
+            dailyLog.setId(id);
+            dailyLogRepository.save(dailyLog);
+        }
         return "dailyLog/view";
     }
 
@@ -143,5 +173,33 @@ public class DailyLogController {
         model.addAttribute("avgEnergyOutsideTrue", Stats.avgEnergy(dailyLogRepository.findAllByWentOutsideTrue()));
 
         return "dailyLog/summary";
+    }
+
+    @GetMapping("add-tag")
+    public String displayAddTagForm(@RequestParam Integer dailyLogId, Model model) {
+        Optional<DailyLog> result = dailyLogRepository.findById(dailyLogId);
+        DailyLog dailyLog = result.get();
+        model.addAttribute("title", "Add Tag to: " + dailyLog.getDate());
+        model.addAttribute("tags", tagRepository.findAll());
+        DailyLogTagDTO dailyLogTag = new DailyLogTagDTO();
+        dailyLogTag.setDailyLog(dailyLog);
+        model.addAttribute("dailyLogTag", dailyLogTag);
+        return "dailyLog/add-tag.html";
+    }
+
+    @PostMapping("add-tag")
+    public String processAddTagForm(@ModelAttribute @Valid DailyLogTagDTO dailyLogTag, Errors errors,
+                                    Model model) {
+        if (!errors.hasErrors()) {
+            DailyLog dailyLog = dailyLogTag.getDailyLog();
+            Tag tag = dailyLogTag.getTag();
+            if (!dailyLog.getTags().contains(tag)) {
+                dailyLog.addTag(tag);
+                dailyLogRepository.save(dailyLog);
+            }
+            return "redirect:detail?dailyLogId=" + dailyLog.getId();
+        }
+
+        return "redirect:add-tag";
     }
 }

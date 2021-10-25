@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -93,7 +92,7 @@ public class AuthenticationController {
     @PostMapping("/login")
     public String processLoginForm(@ModelAttribute LoginFormDTO loginFormDTO,
                                    Errors errors, HttpServletRequest request,
-                                   Model model) {
+                                   Model model, HttpSession session) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Log In");
@@ -117,7 +116,8 @@ public class AuthenticationController {
         }
 
         setUserInSession(request.getSession(), theUser);
-        model.addAttribute("user", theUser);
+        model.addAttribute("user", getUserFromSession(session));
+
         return "redirect:";
     }
 
@@ -125,6 +125,12 @@ public class AuthenticationController {
     public String logout(HttpServletRequest request){
         request.getSession().invalidate();
         return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserName(Principal principal, Model model) {
+        return principal.getName();
     }
 
 }
