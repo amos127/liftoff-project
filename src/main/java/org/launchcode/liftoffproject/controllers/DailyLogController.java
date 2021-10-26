@@ -1,19 +1,24 @@
 package org.launchcode.liftoffproject.controllers;
 
+import org.launchcode.liftoffproject.auth.UserService;
 import org.launchcode.liftoffproject.data.DailyLogRepository;
 import org.launchcode.liftoffproject.data.TagRepository;
 import org.launchcode.liftoffproject.data.UserRepository;
 import org.launchcode.liftoffproject.models.DailyLog;
 import org.launchcode.liftoffproject.models.Stats;
 import org.launchcode.liftoffproject.models.Tag;
+import org.launchcode.liftoffproject.models.User;
 import org.launchcode.liftoffproject.models.dto.DailyLogTagDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
@@ -35,11 +40,13 @@ public class DailyLogController {
     @Autowired
     private TagRepository tagRepository;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("add")
     public String displayAddDailyLog(Model model) {
         DailyLogTagDTO dailyLogTag = new DailyLogTagDTO();
         model.addAttribute(new DailyLog());
-        model.addAttribute("users", userRepository.findAll());
         model.addAttribute("dailyLogTag", dailyLogTag);
         model.addAttribute("tags", tagRepository.findAll());
         return "dailyLog/add";
@@ -48,12 +55,10 @@ public class DailyLogController {
     @PostMapping("add")
     public String processAddDailyLog(@ModelAttribute @Valid DailyLog newDailyLog,
                                      @ModelAttribute @Valid DailyLogTagDTO dailyLogTag,
-                                     Errors errors, Model model) {
+                                     Errors errors, Model model, Principal principal) {
+
         if (!errors.hasErrors()) {
-            Tag tag = dailyLogTag.getTag();
-            if (!newDailyLog.getTags().contains(tag)) {
-                newDailyLog.addTag(tag);
-            }
+            newDailyLog.setUser(principal.getName());
             dailyLogRepository.save(newDailyLog);
             return "dailyLog/view";
         }

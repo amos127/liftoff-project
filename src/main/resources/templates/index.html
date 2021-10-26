@@ -6,7 +6,8 @@
 
 <header th:replace="fragments :: header"></header>
 
-<h2>Welcome, friend!</h2>
+<h2>Welcome!</h2>
 
+<span>[[${#request.remoteUser}]]</span>
 </body>
 </html>

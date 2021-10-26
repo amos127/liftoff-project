@@ -1,5 +1,10 @@
 package org.launchcode.liftoffproject.models;
 
+import org.launchcode.liftoffproject.auth.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -11,14 +16,13 @@ import java.util.Objects;
 @Entity
 public class DailyLog {
 
-    @ManyToOne
-    private User user;
-
     @Id
     @GeneratedValue
     private int id;
 
     private Date date;
+
+    private String user;
 
     private int moodScore;
     private int energyScore;
@@ -42,11 +46,10 @@ public class DailyLog {
     @ManyToMany
     private final List<Tag> tags = new ArrayList<>();
 
-    public DailyLog(User user, Date date, int moodScore, int energyScore, double hoursSlept, boolean ateBreakfast,
+    public DailyLog(Date date, int moodScore, int energyScore, double hoursSlept, boolean ateBreakfast,
                     boolean ateLunch, boolean ateDinner,
                     int alcoholicDrinks, int caffeinatedDrinks,
                     boolean didExercise, boolean wentOutside) {
-        this.user = user;
         this.date = date;
         this.moodScore = moodScore;
         this.hoursSlept = hoursSlept;
@@ -62,20 +65,20 @@ public class DailyLog {
 
     public DailyLog() {}
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public Date getDate() {

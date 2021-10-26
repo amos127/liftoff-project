@@ -8,17 +8,7 @@
 
 <div class="container form">
 <form method="post">
-<!--        <div class="form-group">-->
-<!--            <label>User:-->
-<!--            <select th:field="${dailyLog.user}">-->
-<!--                <option th:each="user : ${users}"-->
-<!--                th:value="${user.id}"-->
-<!--                th:text="${user.username}"></option>-->
-<!--            </select>-->
-<!--            </label>-->
-<!--        </div>-->
-    <p th:text="${user}"></p>
-        <div class="form-group">
+    <div class="form-group">
         <label>Date:
             <input type="date" th:field="${dailyLog.date}" class="form-control">
         </label>
