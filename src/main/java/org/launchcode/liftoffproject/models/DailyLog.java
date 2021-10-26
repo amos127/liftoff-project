@@ -22,7 +22,8 @@ public class DailyLog {
 
     private Date date;
 
-    private String user;
+    @ManyToOne
+    private User user;
 
     private int moodScore;
     private int energyScore;
@@ -73,11 +74,11 @@ public class DailyLog {
         this.id = id;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

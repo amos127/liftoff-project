@@ -55,10 +55,13 @@ public class DailyLogController {
     @PostMapping("add")
     public String processAddDailyLog(@ModelAttribute @Valid DailyLog newDailyLog,
                                      @ModelAttribute @Valid DailyLogTagDTO dailyLogTag,
-                                     Errors errors, Model model, Principal principal) {
+                                     Errors errors, Model model, Principal principal,
+                                     @AuthenticationPrincipal UserDetails currentUser) {
+
+        User user = userRepository.findByUsername(currentUser.getUsername());
 
         if (!errors.hasErrors()) {
-            newDailyLog.setUser(principal.getName());
+            newDailyLog.setUser(user);
             dailyLogRepository.save(newDailyLog);
             return "dailyLog/view";
         }
