@@ -9,7 +9,12 @@
 <div class="container">
     <h1 class="pt-3">Summary</h1>
 
-    <div class="row py-3 justify-content-center">
+    <div class="tab">
+        <button class="tablinks" onclick="openTable(event, 'AveragesDay')">Averages By Day</button>
+        <button class="tablinks" onclick="openTable(event, 'Streaks')">Streaks</button>
+        <button class="tablinks" onclick="openTable(event, 'AveragesHabit')">Averages By Habit</button>
+    </div>
+    <div class="row py-3 justify-content-center tabcontent" id="AveragesDay">
         <div class="col">
             <h5 class="py-1">Averages per day:</h5>
             <table class="table table-striped w-50 border rounded">
@@ -55,7 +60,7 @@
             </table>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center tabcontent" id="Streaks">
         <div class="col">
             <h5 class="py-1">Max Streaks (Days in a row):</h5>
             <table class="table table-striped w-50 border rounded">
@@ -86,7 +91,7 @@
             </table>
         </div>
     </div>
-    <div class="row py-3 justify-content-center">
+    <div class="row py-3 justify-content-center tabcontent" id="AveragesHabit">
         <div class="col">
             <h5 class="py-1">Averages by Habit:</h5>
             <table class="table table-striped w-50 border rounded">

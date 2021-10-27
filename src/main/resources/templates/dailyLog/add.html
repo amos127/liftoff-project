@@ -8,99 +8,115 @@
 
 <div class="container form">
 <form method="post">
-    <div class="form-group">
-        <label>Date:
-            <input type="date" th:field="${dailyLog.date}" class="form-control">
-        </label>
-        <span th:errors="${dailyLog.date}" class="error"></span>
+    <h1>New Daily Log</h1>
+        <div class="form-group">
+            <label>Date:
+                <input type="date" th:field="${dailyLog.date}" class="form-control">
+            </label>
+            <span th:errors="${dailyLog.date}" class="error"></span>
         </div>
-    <div class="form-group">
-        <label>Mood Score:
-            <select th:field="${dailyLog.moodScore}">
-                <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"></option>
-            </select>
-        </label>
+    <hr>
+    <div>
+        <h2>How do you feel today?</h2>
+        <br>
+        <div class="form-group">
+            <label>Mood Score:
+                <select th:field="${dailyLog.moodScore}">
+                    <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Energy Score:
+                <select th:field="${dailyLog.energyScore}">
+                    <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Hours slept last night:
+                <input th:field="${dailyLog.hoursSlept}" class="form-control">
+            </label>
+            <span th:errors="${dailyLog.hoursSlept}" class="error"></span>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Energy Score:
-            <select th:field="${dailyLog.energyScore}">
-                <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"></option>
-            </select>
-        </label>
+    <hr>
+    <div>
+        <h2>What did you consume today?</h2>
+        <br>
+        <div class="form-group">
+            <label>Did you eat breakfast?
+                <select th:field="${dailyLog.ateBreakfast}">
+                    <option th:value="true" th:text="Yes"></option>
+                    <option th:value="false" th:text="No"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Did you eat lunch?
+                <select th:field="${dailyLog.ateLunch}">
+                    <option th:value="true" th:text="Yes"></option>
+                    <option th:value="false" th:text="No"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Did you eat dinner?
+                <select th:field="${dailyLog.ateDinner}">
+                    <option th:value="true" th:text="Yes"></option>
+                    <option th:value="false" th:text="No"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Number of alcoholic drinks:
+                <input th:field="${dailyLog.alcoholicDrinks}" class="form-control">
+            </label>
+            <span th:errors="${dailyLog.alcoholicDrinks}" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label>Number of caffeinated drinks:
+                <input th:field="${dailyLog.caffeinatedDrinks}" class="form-control">
+            </label>
+            <span th:errors="${dailyLog.caffeinatedDrinks}" class="error"></span>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Hours slept last night:
-            <input th:field="${dailyLog.hoursSlept}" class="form-control">
-        </label>
-        <span th:errors="${dailyLog.hoursSlept}" class="error"></span>
-    </div>
-    <div class="form-group">
-        <label>Did you eat breakfast?
-            <select th:field="${dailyLog.ateBreakfast}">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Did you eat lunch?
-            <select th:field="${dailyLog.ateLunch}">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Did you eat dinner?
-            <select th:field="${dailyLog.ateDinner}">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Number of alcoholic drinks:
-            <input th:field="${dailyLog.alcoholicDrinks}" class="form-control">
-        </label>
-        <span th:errors="${dailyLog.alcoholicDrinks}" class="error"></span>
-    </div>
-    <div class="form-group">
-        <label>Number of caffeinated drinks:
-            <input th:field="${dailyLog.caffeinatedDrinks}" class="form-control">
-        </label>
-        <span th:errors="${dailyLog.caffeinatedDrinks}" class="error"></span>
-    </div>
-    <div class="form-group">
-        <label>Did you exercise?
-            <select th:field="${dailyLog.didExercise}">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Did you spend time outside?
-            <select th:field="${dailyLog.wentOutside}">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
+    <hr>
+    <div>
+        <h2>What did you do today?</h2>
+        <br>
+        <div class="form-group">
+            <label>Did you exercise?
+                <select th:field="${dailyLog.didExercise}">
+                    <option th:value="true" th:text="Yes"></option>
+                    <option th:value="false" th:text="No"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Did you spend time outside?
+                <select th:field="${dailyLog.wentOutside}">
+                    <option th:value="true" th:text="Yes"></option>
+                    <option th:value="false" th:text="No"></option>
+                </select>
+            </label>
+        </div>
     </div>
 <!--    <div class="form-group">-->
 <!--        <label>List a good thing that happened today: -->
 <!--            <input>-->
 <!--        </label>-->
 <!--    </div>-->
-    <div>
-        <label>Add tags:
-            <select th:field="${dailyLogTag.tag}">
-                <option th:each="tag : ${tags}"
-                        th:value="${tag.id}"
-                        th:text="${tag.name}">
-                </option>
-            </select>
-        </label>
-    </div>
+<!--    <div>-->
+<!--        <label>Add tags:-->
+<!--            <select th:field="${dailyLogTag.tag}">-->
+<!--                <option th:each="tag : ${tags}"-->
+<!--                        th:value="${tag.id}"-->
+<!--                        th:text="${tag.name}">-->
+<!--                </option>-->
+<!--            </select>-->
+<!--        </label>-->
+<!--    </div>-->
     <div class="form-group">
         <input type="submit" value="Submit" class="btn btn-dark">
     </div>
