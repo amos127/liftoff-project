@@ -2,15 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body class="container pagestyle">
 
 <header th:replace="fragments :: header"></header>
 
 <div class="container">
     <h1 class="py-3">View All</h1>
-    <div>
+    <div class="mt-3">
     <p th:unless="${dailyLogs} and ${dailyLogs.size()}">Nothing logged yet.</p>
     </div>
+
+    <div>
+        <ul>
+            <li th:each="dailyLog : ${dailyLogs}">
+                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="border rounded border-light viewallstyle">
 
     <div th:if="${january.size() > 0}">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseJanuary" aria-expanded="false" aria-controls="collapseJanuary">
@@ -192,6 +202,6 @@
         </div>
     </div>
 </div>
-
+</div>
 </body>
 </html>

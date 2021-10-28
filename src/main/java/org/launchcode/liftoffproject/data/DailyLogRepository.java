@@ -33,4 +33,7 @@ public interface DailyLogRepository extends CrudRepository<DailyLog, Integer> {
     @Query
     List<DailyLog> findAllByWentOutsideTrue();
 
+    @Query
+    List<DailyLog> findAllByUserId(Long id);
+
 }

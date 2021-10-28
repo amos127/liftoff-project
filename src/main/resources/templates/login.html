@@ -2,9 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body class="container homestyle">
 
 <header th:replace="fragments :: header"></header>
+
+<h2>Welcome back!</h2>
 
 <form method="post" th:action="@{/login}">
     <div class="form-group">

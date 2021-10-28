@@ -2,106 +2,129 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body class="container pagestyle">
 
 <header th:replace="fragments :: header"></header>
 
+<div class="container form border rounded border-light">
+
 <form method="post" th:object="${dailyLog}">
+
+    <h1>Log from <span th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></span></h1>
+
     <div class="form-group">
         <input type="hidden" th:value="${dailyLog.id}" name="id" />
     </div>
-    <div class="form-group">
-        <label>Date:
-            <input th:value="${dailyLog.date}" name="date" class="form-control">
-        </label>
-        <span th:errors="${dailyLog.date}" class="error"></span>
-    </div>
-    <div class="form-group">
-        <label>Mood Score:
-            <select th:field="${dailyLog.moodScore}" name="moodScore" class="form-control">
-                <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"
-                        th:selected="${dailyLog.moodScore}"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Energy Score:
-            <select th:field="${dailyLog.energyScore}" name="energyScore" class="form-control">
-                <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"
-                        th:selected="${dailyLog.moodScore}"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Hours slept last night:
-            <input th:value="${dailyLog.hoursSlept}" name="hoursSlept" class="form-control">
-        </label>
-        <span th:errors="${dailyLog.hoursSlept}" class="error"></span>
-    </div>
-    <div class="form-group">
-        <label>Did you eat breakfast?
-            <select th:value="${dailyLog.ateBreakfast}" name="ateBreakfast" class="form-control">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Did you eat lunch?
-            <select th:value="${dailyLog.ateLunch}" name="ateLunch" class="form-control">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Did you eat dinner?
-            <select th:value="${dailyLog.ateDinner}" name="ateDinner" class="form-control">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Number of alcoholic drinks:
-            <input th:value="${dailyLog.alcoholicDrinks}" name="alcoholicDrinks" class="form-control">
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Number of caffeinated drinks:
-            <input th:value="${dailyLog.caffeinatedDrinks}" name="caffeinatedDrinks" class="form-control">
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Did you exercise?
-            <select th:value="${dailyLog.didExercise}" name="didExercise" class="form-control">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Did you spend time outside?
-            <select th:value="${dailyLog.wentOutside}" name="wentOutside" class="form-control">
-                <option th:value="true" th:text="Yes"></option>
-                <option th:value="false" th:text="No"></option>
-            </select>
-        </label>
-    </div>
+<!--    <div class="form-group">-->
+<!--        <label>Date:-->
+<!--            <input th:value="${dailyLog.date}" name="date" class="form-control">-->
+<!--        </label>-->
+<!--        <span th:errors="${dailyLog.date}" class="error"></span>-->
+<!--    </div>-->
+    <hr>
     <div>
-        <label>Add tags:
-            <select th:field="${dailyLogTag.tag}">
-                <option th:each="tag : ${tags}"
-                        th:value="${tag.id}"
-                        th:text="${tag.name}">
-                </option>
-            </select>
-        </label>
+        <h2>How do you feel today?</h2>
+        <br>
+        <div class="form-group">
+            <label>Mood Score:
+                <select th:field="${dailyLog.moodScore}" name="moodScore" class="form-control">
+                    <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"
+                            th:selected="${dailyLog.moodScore}"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Energy Score:
+                <select th:field="${dailyLog.energyScore}" name="energyScore" class="form-control">
+                    <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"
+                            th:selected="${dailyLog.moodScore}"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Hours slept last night:
+                <input th:value="${dailyLog.hoursSlept}" name="hoursSlept" class="form-control">
+            </label>
+            <span th:errors="${dailyLog.hoursSlept}" class="error"></span>
+        </div>
     </div>
+    <hr>
+    <div>
+        <h2>What did you consume today?</h2>
+        <br>
+        <div class="form-group">
+            <label>Did you eat breakfast?
+                <select th:value="${dailyLog.ateBreakfast}" name="ateBreakfast" class="form-control">
+                    <option th:value="true" th:text="Yes"></option>
+                    <option th:value="false" th:text="No"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Did you eat lunch?
+                <select th:value="${dailyLog.ateLunch}" name="ateLunch" class="form-control">
+                    <option th:value="true" th:text="Yes"></option>
+                    <option th:value="false" th:text="No"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Did you eat dinner?
+                <select th:value="${dailyLog.ateDinner}" name="ateDinner" class="form-control">
+                    <option th:value="true" th:text="Yes"></option>
+                    <option th:value="false" th:text="No"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Number of alcoholic drinks:
+                <input th:value="${dailyLog.alcoholicDrinks}" name="alcoholicDrinks" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Number of caffeinated drinks:
+                <input th:value="${dailyLog.caffeinatedDrinks}" name="caffeinatedDrinks" class="form-control">
+            </label>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h2>What did you do today?</h2>
+        <br>
+        <div class="form-group">
+            <label>Did you exercise?
+                <select th:value="${dailyLog.didExercise}" name="didExercise" class="form-control">
+                    <option th:value="true" th:text="Yes"></option>
+                    <option th:value="false" th:text="No"></option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Did you spend time outside?
+                <select th:value="${dailyLog.wentOutside}" name="wentOutside" class="form-control">
+                    <option th:value="true" th:text="Yes"></option>
+                    <option th:value="false" th:text="No"></option>
+                </select>
+            </label>
+        </div>
+    </div>
+<!--    <div>-->
+<!--        <label>Add tags:-->
+<!--            <select th:field="${dailyLogTag.tag}">-->
+<!--                <option th:each="tag : ${tags}"-->
+<!--                        th:value="${tag.id}"-->
+<!--                        th:text="${tag.name}">-->
+<!--                </option>-->
+<!--            </select>-->
+<!--        </label>-->
+<!--    </div>-->
     <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-success">
+        <input type="submit" value="Submit" class="btn btn-dark">
     </div>
+
 </form>
+
+</div>
 
 </body>
 </html>

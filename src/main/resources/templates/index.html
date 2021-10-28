@@ -3,19 +3,16 @@
                 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body class="container homestyle">
 
 <header th:replace="fragments :: header"></header>
 
-<h2>Welcome!</h2>
-
-<span>[[${#request.remoteUser}]]</span>
-
-<div sec:authorize="isAuthenticated()">
-    <a th:href="@{/logout}">Log out</a>
+<div sec:authorize="isAnonymous()" class="my-3">
+    <p>Let's get started.</p>
 </div>
-<div sec:authorize="isAnonymous()">
-    <a th:href="@{/login}">Log in</a>
+
+<div sec:authorize="isAuthenticated()" class="my-3">
+    <h2>Hi, <span>[[${#request.remoteUser}]]</span>!</h2>
 </div>
 </body>
 </html>

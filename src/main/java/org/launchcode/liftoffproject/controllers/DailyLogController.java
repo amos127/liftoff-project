@@ -118,7 +118,7 @@ public class DailyLogController {
 
     @GetMapping("all")
     public String displayAll(Model model) {
-        model.addAttribute("dailyLogs", dailyLogRepository.findAll());
+        model.addAttribute("dailyLogs", dailyLogRepository.findAllByUserId(Long.valueOf(1)));
         model.addAttribute("january", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-01-01"), Date.valueOf("2021-01-31")));
         model.addAttribute("february", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-02-01"), Date.valueOf("2021-02-28")));
         model.addAttribute("march", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-03-01"), Date.valueOf("2021-03-31")));
