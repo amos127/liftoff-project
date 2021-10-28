@@ -1,7 +1,9 @@
 package org.launchcode.liftoffproject.controllers;
 
 import org.launchcode.liftoffproject.auth.EmailExistsException;
+import org.launchcode.liftoffproject.auth.UserAlreadyExistsAuthenticationException;
 import org.launchcode.liftoffproject.auth.UserService;
+import org.launchcode.liftoffproject.data.UserRepository;
 import org.launchcode.liftoffproject.models.User;
 import org.launchcode.liftoffproject.models.dto.LoginRegisterFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class AuthenticationController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserRepository userRepository;
+
     @ModelAttribute("user")
     public User getLoggedInUser(Principal principal) {
         if (principal != null)
@@ -33,25 +38,34 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute LoginRegisterFormDTO loginRegisterFormDTO, Errors errors) {
+    public String register(@ModelAttribute LoginRegisterFormDTO loginRegisterFormDTO, Errors errors,
+                           Model model) {
 
-        if (errors.hasErrors())
-            return "register";
+        User existingUser = userRepository.findByUsername(loginRegisterFormDTO.getUsername());
 
-        try {
-            userService.save(loginRegisterFormDTO);
-        } catch (EmailExistsException e) {
-            errors.rejectValue("username", "username.alreadyexists", e.getMessage());
+        if (existingUser != null) {
+            errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
+            model.addAttribute("title", "Register");
             return "register";
         }
 
+        String password = loginRegisterFormDTO.getPassword();
+        String verifyPassword = loginRegisterFormDTO.getVerifyPassword();
+        if (!password.equals(verifyPassword)) {
+            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
+            model.addAttribute("title", "Register");
+            return "register";
+        }
+        userService.save(loginRegisterFormDTO);
         return "redirect:/";
+
     }
 
     @GetMapping(value = "/login")
-    public String login(Model model, Principal user, String error, String logout) {
+    public String login(@ModelAttribute LoginRegisterFormDTO loginRegisterFormDTO,
+                        Model model, Principal user, Errors errors) {
 
-        if (user!= null)
+        if (user != null)
             return "redirect:/";
 
         return "login";

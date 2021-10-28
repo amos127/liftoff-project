@@ -2,22 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body class="container pagestyle">
 
 <header th:replace="fragments :: header"></header>
 
-<div class="container">
-    <h1 class="pt-3">Summary</h1>
+    <h1 class="pt-3">Stats</h1>
 
     <div class="tab">
         <button class="tablinks" onclick="openTable(event, 'AveragesDay')">Averages By Day</button>
         <button class="tablinks" onclick="openTable(event, 'Streaks')">Streaks</button>
         <button class="tablinks" onclick="openTable(event, 'AveragesHabit')">Averages By Habit</button>
     </div>
-    <div class="row py-3 justify-content-center tabcontent" id="AveragesDay">
-        <div class="col">
-            <h5 class="py-1">Averages per day:</h5>
-            <table class="table table-striped w-50 border rounded">
+    <div class="tabcontent" id="AveragesDay">
+            <h4 class="py-3">Averages per day:</h4>
+            <table class="table table-striped table-light">
                 <thead>
                     <tr>
                         <th scope="col"></th>
@@ -58,12 +56,11 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
     </div>
-    <div class="row justify-content-center tabcontent" id="Streaks">
-        <div class="col">
-            <h5 class="py-1">Max Streaks (Days in a row):</h5>
-            <table class="table table-striped w-50 border rounded">
+
+    <div class="tabcontent" id="Streaks">
+            <h4 class="py-3">Max Streaks (Days in a row):</h4>
+            <table class="table table-striped table-light">
                 <thead>
                 <tr>
                     <th scope="col"></th>
@@ -89,12 +86,10 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
     </div>
-    <div class="row py-3 justify-content-center tabcontent" id="AveragesHabit">
-        <div class="col">
-            <h5 class="py-1">Averages by Habit:</h5>
-            <table class="table table-striped w-50 border rounded">
+    <div class="tabcontent" id="AveragesHabit">
+            <h4 class="py-3">Averages by Habit:</h4>
+            <table class="table table-striped table-light">
                 <thead>
                 <tr>
                     <th scope="col"></th>
@@ -130,12 +125,6 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
     </div>
-
-</div>
-
-<p class="pb-3"><a href="/dailyLog/all">View All Logs</a></p>
-
 </body>
 </html>

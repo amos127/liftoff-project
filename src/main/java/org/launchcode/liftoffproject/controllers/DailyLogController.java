@@ -14,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,14 +59,17 @@ public class DailyLogController {
                                      Errors errors, Model model, Principal principal,
                                      @AuthenticationPrincipal UserDetails currentUser) {
 
+
+        if (errors.hasErrors()) {
+            return "dailyLog/add";
+        }
+
         User user = userRepository.findByUsername(currentUser.getUsername());
 
-        if (!errors.hasErrors()) {
-            newDailyLog.setUser(user);
-            dailyLogRepository.save(newDailyLog);
-            return "dailyLog/view";
-        }
-            return "dailyLog/add";
+        newDailyLog.setUser(user);
+        dailyLogRepository.save(newDailyLog);
+        return "dailyLog/view";
+
     }
 
     @GetMapping("view/{id}")
@@ -117,27 +121,33 @@ public class DailyLogController {
     }
 
     @GetMapping("all")
-    public String displayAll(Model model) {
-        model.addAttribute("dailyLogs", dailyLogRepository.findAllByUserId(Long.valueOf(1)));
-        model.addAttribute("january", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-01-01"), Date.valueOf("2021-01-31")));
-        model.addAttribute("february", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-02-01"), Date.valueOf("2021-02-28")));
-        model.addAttribute("march", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-03-01"), Date.valueOf("2021-03-31")));
-        model.addAttribute("april", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-04-01"), Date.valueOf("2021-04-30")));
-        model.addAttribute("may", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-05-01"), Date.valueOf("2021-05-31")));
-        model.addAttribute("june", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-06-01"), Date.valueOf("2021-06-30")));
-        model.addAttribute("july", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-07-01"), Date.valueOf("2021-07-31")));
-        model.addAttribute("august", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-08-01"), Date.valueOf("2021-08-31")));
-        model.addAttribute("september", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-09-01"), Date.valueOf("2021-09-30")));
-        model.addAttribute("october", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-10-01"), Date.valueOf("2021-10-31")));
-        model.addAttribute("november", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-11-01"), Date.valueOf("2021-11-30")));
-        model.addAttribute("december", dailyLogRepository.findAllByDateBetween(Date.valueOf("2021-12-01"), Date.valueOf("2021-12-31")));
+    public String displayAll(Model model, DailyLog dailyLog,
+                             @AuthenticationPrincipal UserDetails currentUser) {
+
+        User user = userRepository.findByUsername(currentUser.getUsername());
+
+        model.addAttribute("dailyLogs", dailyLogRepository.findAllByUserId(Long.valueOf(user.getId())));
+        model.addAttribute("january", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-01-01"), Date.valueOf("2021-01-31"), Long.valueOf(user.getId())));
+        model.addAttribute("february", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-02-01"), Date.valueOf("2021-02-28"), Long.valueOf(user.getId())));
+        model.addAttribute("march", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-03-01"), Date.valueOf("2021-03-31"), Long.valueOf(user.getId())));
+        model.addAttribute("april", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-04-01"), Date.valueOf("2021-04-30"), Long.valueOf(user.getId())));
+        model.addAttribute("may", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-05-01"), Date.valueOf("2021-05-31"), Long.valueOf(user.getId())));
+        model.addAttribute("june", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-06-01"), Date.valueOf("2021-06-30"), Long.valueOf(user.getId())));
+        model.addAttribute("july", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-07-01"), Date.valueOf("2021-07-31"), Long.valueOf(user.getId())));
+        model.addAttribute("august", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-08-01"), Date.valueOf("2021-08-31"), Long.valueOf(user.getId())));
+        model.addAttribute("september", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-09-01"), Date.valueOf("2021-09-30"), Long.valueOf(user.getId())));
+        model.addAttribute("october", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-10-01"), Date.valueOf("2021-10-31"), Long.valueOf(user.getId())));
+        model.addAttribute("november", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-11-01"), Date.valueOf("2021-11-30"), Long.valueOf(user.getId())));
+        model.addAttribute("december", dailyLogRepository.findAllByDateBetweenAndUserIdOrderByDate(Date.valueOf("2021-12-01"), Date.valueOf("2021-12-31"), Long.valueOf(user.getId())));
         return "dailyLog/all";
     }
 
-    @GetMapping("summary")
-    public String displaySummary(Model model) {
+    @GetMapping("stats")
+    public String displaySummary(Model model, @AuthenticationPrincipal UserDetails currentUser) {
 
-        Iterable<DailyLog> allLogs = dailyLogRepository.findAll();
+        User user = userRepository.findByUsername(currentUser.getUsername());
+
+        Iterable<DailyLog> allLogs = dailyLogRepository.findAllByUserId(Long.valueOf(user.getId()));
 
         List<DailyLog> currentWeekLogs = new ArrayList<>();
         for (DailyLog log : allLogs) {
@@ -180,7 +190,7 @@ public class DailyLogController {
         model.addAttribute("avgMoodOutsideTrue", Stats.avgMood(dailyLogRepository.findAllByWentOutsideTrue()));
         model.addAttribute("avgEnergyOutsideTrue", Stats.avgEnergy(dailyLogRepository.findAllByWentOutsideTrue()));
 
-        return "dailyLog/summary";
+        return "dailyLog/stats";
     }
 
     @GetMapping("add-tag")

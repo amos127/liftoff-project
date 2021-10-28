@@ -1,10 +1,5 @@
 package org.launchcode.liftoffproject.models;
 
-import org.launchcode.liftoffproject.auth.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -28,8 +23,8 @@ public class DailyLog {
     private int moodScore;
     private int energyScore;
 
-    @Min(value = 0, message = "Must be between 0-24")
-    @Max(value = 24, message = "Must be between 0-24")
+    @Min(value = 0, message = "Must be between 0 and 24.")
+    @Max(value = 0, message = "Must be between 0 and 24.")
     private double hoursSlept;
 
     private boolean ateBreakfast;

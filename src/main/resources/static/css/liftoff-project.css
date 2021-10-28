@@ -19,6 +19,7 @@
 
 .navigation {
     background-color: #16313B;
+    font-family: Courier, monospace;
 }
 
 .navigation a {
@@ -58,13 +59,15 @@ hr {
 .tab {
   float: left;
   border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  background-color: #A4C7D5;
   width: 30%;
-  height: 300px;
+  height: 420px;
+  color: #16313B;
 }
 
 /* Style the buttons that are used to open the tab content */
 .tab button {
+  font-family: Courier, monospace;
   display: block;
   background-color: inherit;
   color: black;
@@ -89,10 +92,15 @@ hr {
 
 /* Style the tab content */
 .tabcontent {
+  background-color: #A4C7D5;
+  font-family: Courier, monospace;
+  display: none;
   float: left;
+  margin-top: ($spacer * .25);
   padding: 0px 12px;
   border: 1px solid #ccc;
   width: 70%;
   border-left: none;
-  height: 300px;
+  height: 420px;
+  color: #16313B;
 }

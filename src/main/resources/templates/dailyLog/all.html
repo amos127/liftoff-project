@@ -12,14 +12,6 @@
     <p th:unless="${dailyLogs} and ${dailyLogs.size()}">Nothing logged yet.</p>
     </div>
 
-    <div>
-        <ul>
-            <li th:each="dailyLog : ${dailyLogs}">
-                <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
-            </li>
-        </ul>
-    </div>
-
     <div class="border rounded border-light viewallstyle">
 
     <div th:if="${january.size() > 0}">
@@ -33,7 +25,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${january.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -48,7 +39,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${february.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -63,7 +53,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${march.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -78,7 +67,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${april.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -93,7 +81,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${may.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -108,7 +95,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${june.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -123,7 +109,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${july.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -138,7 +123,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${august.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -153,7 +137,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${september.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -168,7 +151,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${october.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -183,7 +165,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${november.size()}">Nothing logged.</p>
         </div>
     </div>
 
@@ -198,7 +179,6 @@
                     <a th:href="@{'/dailyLog/view/' + ${dailyLog.id}}" th:text="${#dates.format(dailyLog.date, 'MM-dd-yyyy')}"></a>
                 </li>
             </ul>
-            <p th:unless="${dailyLogs} and ${december.size()}">Nothing logged.</p>
         </div>
     </div>
 </div>

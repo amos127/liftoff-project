@@ -22,6 +22,9 @@ public interface DailyLogRepository extends CrudRepository<DailyLog, Integer> {
     List<DailyLog> findAllByDateBetween(Date date, Date date2);
 
     @Query
+    List<DailyLog> findAllByDateBetweenAndUserIdOrderByDate(Date date, Date date2, Long id);
+
+    @Query
     List<DailyLog> findAllByAteBreakfastTrue();
 
     @Query

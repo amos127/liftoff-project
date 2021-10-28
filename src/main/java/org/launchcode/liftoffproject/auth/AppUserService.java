@@ -20,11 +20,11 @@ public class AppUserService implements UserService {
 
     @Transactional
     @Override
-    public User save(LoginRegisterFormDTO loginRegisterFormDTO) throws EmailExistsException {
+    public User save(LoginRegisterFormDTO loginRegisterFormDTO) throws UserAlreadyExistsAuthenticationException {
 
         User existingUser = userRepository.findByUsername(loginRegisterFormDTO.getUsername());
         if (existingUser != null)
-            throw new EmailExistsException("The username " + loginRegisterFormDTO.getUsername()
+            throw new UserAlreadyExistsAuthenticationException("The username " + loginRegisterFormDTO.getUsername()
                     + " already exists.");
 
         User newUser = new User(

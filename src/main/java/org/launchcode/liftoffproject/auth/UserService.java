@@ -5,7 +5,7 @@ import org.launchcode.liftoffproject.models.dto.LoginRegisterFormDTO;
 
 public interface UserService {
 
-    public User save(LoginRegisterFormDTO loginRegisterFormDTO) throws EmailExistsException;
+    public User save(LoginRegisterFormDTO loginRegisterFormDTO) throws UserAlreadyExistsAuthenticationException;
     public User findByUsername(String username);
 
 }

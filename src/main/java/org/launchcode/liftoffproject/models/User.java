@@ -1,12 +1,19 @@
 package org.launchcode.liftoffproject.models;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class User {
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Id
     @GeneratedValue
@@ -58,6 +65,9 @@ public class User {
         this.enabled = enabled;
     }
 
+    public boolean isMatchingPassword(String password) {
+        return encoder.matches(password, password);
+    }
 
     @Override
     public boolean equals(final Object obj) {
