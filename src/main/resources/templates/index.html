@@ -9,10 +9,31 @@
 
 <div sec:authorize="isAnonymous()" class="my-3">
     <p>Let's get started.</p>
+    <div class="row my-3">
+        <button class="btn btn-light" type="button">
+            <a href="/login">Log In</a>
+        </button>
+    </div>
+    <div class="row my-3">
+        <button class="btn btn-light" type="button">
+            <a href="/register">Sign Up</a>
+        </button>
+    </div>
+    </div>
 </div>
 
 <div sec:authorize="isAuthenticated()" class="my-3">
     <h2>Hi, <span>[[${#request.remoteUser}]]</span>!</h2>
+    <div class="row my-3">
+    <button class="btn btn-light" type="button">
+        <a href="/dailyLog/add">Add New Entry</a>
+    </button>
+    </div>
+    <div class="row my-3">
+    <button class="btn btn-light" type="button">
+        <a href="/dailyLog/all">View Previous Logs</a>
+    </button>
+    </div>
 </div>
 </body>
 </html>

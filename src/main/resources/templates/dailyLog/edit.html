@@ -15,12 +15,9 @@
     <div class="form-group">
         <input type="hidden" th:value="${dailyLog.id}" name="id" />
     </div>
-<!--    <div class="form-group">-->
-<!--        <label>Date:-->
-<!--            <input th:value="${dailyLog.date}" name="date" class="form-control">-->
-<!--        </label>-->
-<!--        <span th:errors="${dailyLog.date}" class="error"></span>-->
-<!--    </div>-->
+    <div class="form-group">
+        <input type="hidden" th:value="${dailyLog.date}" name="date" class="form-control">
+    </div>
     <hr>
     <div>
         <h2>How do you feel today?</h2>
@@ -45,7 +42,8 @@
             <label>Hours slept last night:
                 <input th:value="${dailyLog.hoursSlept}" name="hoursSlept" class="form-control">
             </label>
-            <span th:errors="${dailyLog.hoursSlept}" class="error"></span>
+            <p th:if="${tooMuch}" class="error">Must be between 0 and 24.</p>
+<!--            <span th:errors="${dailyLog.hoursSlept}" class="error"></span>-->
         </div>
     </div>
     <hr>

@@ -57,13 +57,15 @@ public class DailyLogController {
     public String processAddDailyLog(@ModelAttribute @Valid DailyLog newDailyLog,
                                      @ModelAttribute @Valid DailyLogTagDTO dailyLogTag,
                                      Errors errors, Model model, Principal principal,
-                                     @AuthenticationPrincipal UserDetails currentUser) {
+                                     @AuthenticationPrincipal UserDetails currentUser,
+                                     @RequestParam(required = false) Double hoursSlept) {
 
 
-        if (errors.hasErrors()) {
+        if (hoursSlept > 24) {
+            model.addAttribute("tooMuch", true);
             return "dailyLog/add";
         }
-
+        
         User user = userRepository.findByUsername(currentUser.getUsername());
 
         newDailyLog.setUser(user);
@@ -102,13 +104,17 @@ public class DailyLogController {
     @PostMapping("edit/{id}")
     public String processEditDailyLog(@PathVariable int id, @ModelAttribute DailyLog dailyLog,
                                       @ModelAttribute @Valid DailyLogTagDTO dailyLogTag,
-                                      Errors errors) {
+                                      Errors errors, @AuthenticationPrincipal UserDetails currentUser) {
+
+        User user = userRepository.findByUsername(currentUser.getUsername());
+
         if (!errors.hasErrors()) {
             Tag tag = dailyLogTag.getTag();
             if (!dailyLog.getTags().contains(tag)) {
                 dailyLog.addTag(tag);
             }
             dailyLog.setId(id);
+            dailyLog.setUser(user);
             dailyLogRepository.save(dailyLog);
         }
         return "dailyLog/view";
@@ -181,14 +187,14 @@ public class DailyLogController {
         model.addAttribute("maxStreakAlcohol", Stats.maxStreakLessThanThreeDrinks(allLogs));
         model.addAttribute("maxStreakSleep", Stats.maxStreakSleptOverSevenHours(allLogs));
 
-        model.addAttribute("avgMoodBreakfastTrue", Stats.avgMood(dailyLogRepository.findAllByAteBreakfastTrue()));
-        model.addAttribute("avgEnergyBreakfastTrue", Stats.avgEnergy(dailyLogRepository.findAllByAteBreakfastTrue()));
-        model.addAttribute("avgMoodExerciseTrue", Stats.avgMood(dailyLogRepository.findAllByDidExerciseTrue()));
-        model.addAttribute("avgEnergyExerciseTrue", Stats.avgEnergy(dailyLogRepository.findAllByDidExerciseTrue()));
-        model.addAttribute("avgMoodSleptSeven", Stats.avgMood(dailyLogRepository.findAllByHoursSleptGreaterThanEqual(Double.valueOf(7))));
-        model.addAttribute("avgEnergySleptSeven", Stats.avgEnergy(dailyLogRepository.findAllByHoursSleptGreaterThanEqual(Double.valueOf(7))));
-        model.addAttribute("avgMoodOutsideTrue", Stats.avgMood(dailyLogRepository.findAllByWentOutsideTrue()));
-        model.addAttribute("avgEnergyOutsideTrue", Stats.avgEnergy(dailyLogRepository.findAllByWentOutsideTrue()));
+        model.addAttribute("avgMoodBreakfastTrue", Stats.avgMood(dailyLogRepository.findAllByAteBreakfastTrueAndUserId(Long.valueOf(user.getId()))));
+        model.addAttribute("avgEnergyBreakfastTrue", Stats.avgEnergy(dailyLogRepository.findAllByAteBreakfastTrueAndUserId(Long.valueOf(user.getId()))));
+        model.addAttribute("avgMoodExerciseTrue", Stats.avgMood(dailyLogRepository.findAllByDidExerciseTrueAndUserId(Long.valueOf(user.getId()))));
+        model.addAttribute("avgEnergyExerciseTrue", Stats.avgEnergy(dailyLogRepository.findAllByDidExerciseTrueAndUserId(Long.valueOf(user.getId()))));
+        model.addAttribute("avgMoodSleptSeven", Stats.avgMood(dailyLogRepository.findAllByHoursSleptGreaterThanEqualAndUserId(Double.valueOf(7), Long.valueOf(user.getId()))));
+        model.addAttribute("avgEnergySleptSeven", Stats.avgEnergy(dailyLogRepository.findAllByHoursSleptGreaterThanEqualAndUserId(Double.valueOf(7), Long.valueOf(user.getId()))));
+        model.addAttribute("avgMoodOutsideTrue", Stats.avgMood(dailyLogRepository.findAllByWentOutsideTrueAndUserId(Long.valueOf(user.getId()))));
+        model.addAttribute("avgEnergyOutsideTrue", Stats.avgEnergy(dailyLogRepository.findAllByWentOutsideTrueAndUserId(Long.valueOf(user.getId()))));
 
         return "dailyLog/stats";
     }

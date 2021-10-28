@@ -25,16 +25,16 @@ public interface DailyLogRepository extends CrudRepository<DailyLog, Integer> {
     List<DailyLog> findAllByDateBetweenAndUserIdOrderByDate(Date date, Date date2, Long id);
 
     @Query
-    List<DailyLog> findAllByAteBreakfastTrue();
+    List<DailyLog> findAllByAteBreakfastTrueAndUserId(Long id);
 
     @Query
-    List<DailyLog> findAllByDidExerciseTrue();
+    List<DailyLog> findAllByDidExerciseTrueAndUserId(Long id);
 
     @Query
-    List<DailyLog> findAllByHoursSleptGreaterThanEqual(Double hours);
+    List<DailyLog> findAllByHoursSleptGreaterThanEqualAndUserId(Double hours, Long id);
 
     @Query
-    List<DailyLog> findAllByWentOutsideTrue();
+    List<DailyLog> findAllByWentOutsideTrueAndUserId(Long id);
 
     @Query
     List<DailyLog> findAllByUserId(Long id);

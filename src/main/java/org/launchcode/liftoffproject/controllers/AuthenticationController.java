@@ -57,7 +57,7 @@ public class AuthenticationController {
             return "register";
         }
         userService.save(loginRegisterFormDTO);
-        return "redirect:/";
+        return "login";
 
     }
 

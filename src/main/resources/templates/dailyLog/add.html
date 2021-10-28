@@ -21,23 +21,24 @@
         <br>
         <div class="form-group">
             <label>Mood Score:
-                <select th:field="${dailyLog.moodScore}">
+                <select th:field="${dailyLog.moodScore}" name="moodScore" class="form-control">
                     <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"></option>
                 </select>
             </label>
         </div>
         <div class="form-group">
             <label>Energy Score:
-                <select th:field="${dailyLog.energyScore}">
+                <select th:field="${dailyLog.energyScore}" name="energyScore" class="form-control">
                     <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"></option>
                 </select>
             </label>
         </div>
         <div class="form-group">
             <label>Hours slept last night:
-                <input th:field="${dailyLog.hoursSlept}" class="form-control">
+                <input th:field="${dailyLog.hoursSlept}" name="hoursSlept" class="form-control">
             </label>
-            <span th:errors="${dailyLog.hoursSlept}" class="error"></span>
+            <p th:if="${tooMuch}" class="error">Must be between 0 and 24.</p>
+<!--            <span th:errors="${dailyLog.hoursSlept}" class="error"></span>-->
         </div>
     </div>
     <hr>
@@ -46,7 +47,7 @@
         <br>
         <div class="form-group">
             <label>Did you eat breakfast?
-                <select th:field="${dailyLog.ateBreakfast}">
+                <select th:field="${dailyLog.ateBreakfast}" name="ateBreakfast" class="form-control">
                     <option th:value="true" th:text="Yes"></option>
                     <option th:value="false" th:text="No"></option>
                 </select>
@@ -54,7 +55,7 @@
         </div>
         <div class="form-group">
             <label>Did you eat lunch?
-                <select th:field="${dailyLog.ateLunch}">
+                <select th:field="${dailyLog.ateLunch}" name="ateLunch" class="form-control">
                     <option th:value="true" th:text="Yes"></option>
                     <option th:value="false" th:text="No"></option>
                 </select>
@@ -62,7 +63,7 @@
         </div>
         <div class="form-group">
             <label>Did you eat dinner?
-                <select th:field="${dailyLog.ateDinner}">
+                <select th:field="${dailyLog.ateDinner}" name="ateDinner" class="form-control">
                     <option th:value="true" th:text="Yes"></option>
                     <option th:value="false" th:text="No"></option>
                 </select>
@@ -70,13 +71,13 @@
         </div>
         <div class="form-group">
             <label>Number of alcoholic drinks:
-                <input th:field="${dailyLog.alcoholicDrinks}" class="form-control">
+                <input th:field="${dailyLog.alcoholicDrinks}" name="alcoholicDrinks" class="form-control">
             </label>
             <span th:errors="${dailyLog.alcoholicDrinks}" class="error"></span>
         </div>
         <div class="form-group">
             <label>Number of caffeinated drinks:
-                <input th:field="${dailyLog.caffeinatedDrinks}" class="form-control">
+                <input th:field="${dailyLog.caffeinatedDrinks}" name="caffeinatedDrinks" class="form-control">
             </label>
             <span th:errors="${dailyLog.caffeinatedDrinks}" class="error"></span>
         </div>
@@ -87,7 +88,7 @@
         <br>
         <div class="form-group">
             <label>Did you exercise?
-                <select th:field="${dailyLog.didExercise}">
+                <select th:field="${dailyLog.didExercise}" name="didExercise" class="form-control">
                     <option th:value="true" th:text="Yes"></option>
                     <option th:value="false" th:text="No"></option>
                 </select>
@@ -95,7 +96,7 @@
         </div>
         <div class="form-group">
             <label>Did you spend time outside?
-                <select th:field="${dailyLog.wentOutside}">
+                <select th:field="${dailyLog.wentOutside}" name="wentOutside" class="form-control">
                     <option th:value="true" th:text="Yes"></option>
                     <option th:value="false" th:text="No"></option>
                 </select>

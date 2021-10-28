@@ -23,18 +23,18 @@ public class DailyLog {
     private int moodScore;
     private int energyScore;
 
-    @Min(value = 0, message = "Must be between 0 and 24.")
-    @Max(value = 0, message = "Must be between 0 and 24.")
+//    @Min(value = 0, message = "Must be between 0 and 24.")
+//    @Max(value = 0, message = "Must be between 0 and 24.")
     private double hoursSlept;
 
     private boolean ateBreakfast;
     private boolean ateLunch;
     private boolean ateDinner;
 
-    @PositiveOrZero(message = "Must be zero or higher")
+//    @PositiveOrZero(message = "Must be zero or higher")
     private int alcoholicDrinks;
 
-    @PositiveOrZero(message = "Must be zero or higher")
+//    @PositiveOrZero(message = "Must be zero or higher")
     private int caffeinatedDrinks;
     private boolean didExercise;
     private boolean wentOutside;
